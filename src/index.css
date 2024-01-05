@@ -1,0 +1,137 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+.calendar {
+  height: 100vh;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.calendar__wrapper {
+  display: flex;
+  flex: 1;
+}
+
+.calendar__month {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 183px));
+  grid-template-rows: repeat(5, minmax(0, 1fr));
+  /* background-color: #fff; */
+  column-gap: 1px;
+  min-height: 100vh;
+  border-radius: 52px;
+}
+
+.calendar__header {
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 1rem;
+}
+
+.calendar__header--container {
+  width: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  transform: translateX(-50px);
+}
+
+.calendar__header h2 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 2.5rem;
+  text-transform: capitalize;
+}
+
+.day {
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid #e9ecf1;
+  padding: 12px;
+  padding-left: 9px;
+}
+
+.noBorder {
+  display: flex;
+  flex-direction: column;
+  border-left: none;
+  padding: 12px;
+  padding-left: 9px;
+}
+
+.day__text {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  /* padding: 0.25rem; */
+  margin-left: 12px;
+  /* margin-bottom: 0.25rem; */
+  font-weight: 500;
+}
+
+.weekdays {
+  display: flex;
+  flex-direction: column;
+  background-color: #e9ecf1;
+}
+
+.weekdays__header {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 183px));
+  column-gap: 1px;
+}
+
+.weekdays__header p {
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 2.5rem;
+  padding: 0.25rem;
+  background-color: #fff;
+}
+
+.highlightDay {
+  color: #ff0000;
+}
+
+.btn-container {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.arrow {
+  background-color: #fff;
+  border: none;
+  outline: none;
+}
+.arrow:hover {
+  cursor: pointer;
+}
+
+.arrow:active {
+  transform: scale(1.1);
+}
+
+.highlightWeek {
+  background-color: rgba(233, 236, 241, 0.75);
+}
+
+.highlightWeek.leftRounded {
+  border-top-left-radius: 16px;
+  border-bottom-left-radius: 16px;
+  /* border-left: 1px solid #e9ecf1; */
+}
+.highlightWeek.rightRounded {
+  border-top-right-radius: 16px;
+  border-bottom-right-radius: 16px;
+}
