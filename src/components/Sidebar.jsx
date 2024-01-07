@@ -3,7 +3,6 @@ const Sidebar = () => {
     <aside
       style={{
         width: "17.5rem",
-        padding: "3rem 2rem",
       }}
       className="sidebar"
     >

@@ -28,7 +28,7 @@
   /* background-color: #fff; */
   column-gap: 1px;
   min-height: 100vh;
-  border-radius: 52px;
+  /* border-radius: 52px; */
 }
 
 .calendar__header {
@@ -69,6 +69,7 @@
   border-left: none;
   padding: 12px;
   padding-left: 9px;
+  /* background-color: #fff; */
 }
 
 .day__text {
@@ -96,7 +97,8 @@
   font-weight: 500;
   font-size: 1rem;
   line-height: 2.5rem;
-  padding: 0.25rem;
+  /* padding: 0.25rem; */
+  padding-left: 1.3rem;
   background-color: #fff;
 }
 
@@ -134,4 +136,81 @@
 .highlightWeek.rightRounded {
   border-top-right-radius: 16px;
   border-bottom-right-radius: 16px;
+}
+/* search form */
+
+/* form.search-form {
+  width: "100%";
+  margin: "0 auto 2.5rem";
+  display: "flex";
+  gap: "38px";
+}
+
+
+
+.search-form__input {
+  display: "block";
+  background: "#e9ecf1";
+  width: "calc(100% - 128px)";
+  border: "none";
+  outline: "none";
+  height: "48px";
+  border-radius: "12px";
+  background-color: red;
+}
+
+.search-form__btn {
+  display: "block";
+  background-color: "red";
+  color: "white";
+  width: "120px";
+  border: "none";
+  outline: "none";
+  height: "48px";
+  border-radius: "12px";
+} */
+
+.search-form {
+  width: 100%;
+  margin: 0 auto 2.5rem;
+  display: flex;
+  gap: 0.5rem;
+  /* ---- */
+  position: relative;
+}
+
+.search-form__input {
+  display: block;
+  background-color: #e9ecf1;
+  width: calc(100% - 128px);
+  border: none;
+  outline: none;
+  height: 48px;
+  padding: 1rem 1.25rem 1rem 3rem;
+  border-radius: 12px;
+}
+
+.search-form__btn {
+  display: block;
+  background-color: #ff0000;
+  color: #fff;
+  width: 120px;
+  border: none;
+  outline: none;
+  height: 48px;
+  border-radius: 12px;
+}
+
+.search-icon {
+  position: absolute;
+  top: 16px;
+  left: 21px;
+  transform: scale(1.2);
+  color: rgba(0, 0, 0, 0.5);
+}
+
+/* days past */
+
+.dim {
+  opacity: 0.5;
 }
