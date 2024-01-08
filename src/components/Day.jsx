@@ -39,13 +39,13 @@ const Day = ({ day, rowIndex }) => {
       {dayjs(day).isBefore(dayjs().subtract(1, "day")) ? (
         <div className={`${highlightCurrWeek(rowIndex)} dim `}>
           <p className={`day__text ${highlightCurrDay()} `}>
-            {day.format("D")}{" "}
+            {day.format("D")}
           </p>
         </div>
       ) : (
         <div className={highlightCurrWeek(rowIndex)}>
           <p className={`day__text ${highlightCurrDay()} `}>
-            {day.format("D")}{" "}
+            {day.format("D")}
           </p>
         </div>
       )}
