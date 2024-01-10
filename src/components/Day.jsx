@@ -1,14 +1,14 @@
 import dayjs from "dayjs";
+import { useGlobalContext } from "../context/GlobalContext";
+import Event from "./Event";
+import { data } from "../data";
 
 const Day = ({ day, rowIndex }) => {
-  const newDay = day.format("DD-MM-YY");
-  console.log(dayjs(newDay).isBefore(dayjs().format("DD-MM-YY")));
-
-  // console.log(dayjs().format("DD-MM-YY"));
-
+  // current day
   const highlightCurrDay = () =>
     day.format("DD-MM-YY") === dayjs().format("DD-MM-YY") ? "highlightDay" : "";
 
+    // current week
   const highlightCurrWeek = (index) => {
     if (
       index === 0 &&
@@ -35,21 +35,27 @@ const Day = ({ day, rowIndex }) => {
   };
 
   return (
-    <>
+    <div className={highlightCurrWeek(rowIndex)}>
+      {/* day */}
       {dayjs(day).isBefore(dayjs().subtract(1, "day")) ? (
-        <div className={`${highlightCurrWeek(rowIndex)} dim `}>
-          <p className={`day__text ${highlightCurrDay()} `}>
-            {day.format("D")}
-          </p>
-        </div>
+        <p className={`day__text ${highlightCurrDay()} dim`}>
+          {day.format("D")}
+        </p>
       ) : (
-        <div className={highlightCurrWeek(rowIndex)}>
-          <p className={`day__text ${highlightCurrDay()} `}>
-            {day.format("D")}
-          </p>
-        </div>
+        <p className={`day__text ${highlightCurrDay()} `}>{day.format("D")}</p>
       )}
-    </>
+      {/* events */}
+      {data.map((info) => {
+        const { id, start_date, finish_date, name } = info;
+
+        if (
+          dayjs(day).format("YY-MM-DD") === dayjs(start_date).format("YY-MM-DD")
+        ) {
+          return <Event key={id} name={name} />;
+        }
+        return;
+      })}
+    </div>
   );
 };
 export default Day;
