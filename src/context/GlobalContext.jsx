@@ -16,7 +16,11 @@ const AppContext = ({ children }) => {
 
   return (
     <GlobalContext.Provider
-      value={{ monthIndex, setMonthIndex, extractedData }}
+      value={{
+        monthIndex,
+        setMonthIndex,
+        extractedData,
+      }}
     >
       {children}
     </GlobalContext.Provider>

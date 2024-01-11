@@ -26,7 +26,7 @@ export const data = [
     class: "Вебинар.ру",
     type: "webinar",
     start_date: "2024-02-13T10:00:00+00:00",
-    finish_date: "2024-02-13T13:00:00+00:00",
+    finish_date: "2024-02-15T13:00:00+00:00",
     is_passed: 0,
     company: "Дынина Ольга Сергеевна",
     Mandatorys: "0",
