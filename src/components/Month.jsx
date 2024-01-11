@@ -3,8 +3,8 @@ import Day from "./Day";
 import GridLines from "./GridLines";
 import dayjs from "dayjs";
 import { useGlobalContext } from "../context/GlobalContext";
-import { data } from "../data";
 import Event from "./Event";
+import WeeklyEvents from "./WeeklyEvents";
 
 const Month = ({ month }) => {
   return (
@@ -18,31 +18,13 @@ const Month = ({ month }) => {
           ) {
             return (
               <div className={`week highlight`} key={index}>
-                <div className="currentWeekDay">
-                  {row.map((day, idx) => {
-                    return <Day key={idx} day={day} rowIndex={idx} />;
-                  })}
-                </div>
-                <div className="events">
-                  {data.map((info) => {
-                    return <Event id={info.id} {...info} />;
-                  })}
-                </div>
+                <WeeklyEvents row={row} />
               </div>
             );
           } else {
             return (
               <div className={"week"} key={index}>
-                <div className="currentWeekDay">
-                  {row.map((day, idx) => {
-                    return <Day key={idx} day={day} rowIndex={idx} />;
-                  })}
-                </div>
-                <div className="events">
-                  {data.map((info) => {
-                    return <Event id={info.id} {...info} />;
-                  })}
-                </div>
+                <WeeklyEvents row={row} />
               </div>
             );
           }
