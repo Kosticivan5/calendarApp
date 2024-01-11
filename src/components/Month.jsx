@@ -6,12 +6,13 @@ import { useGlobalContext } from "../context/GlobalContext";
 import Event from "./Event";
 import WeeklyEvents from "./WeeklyEvents";
 
-const Month = ({ month }) => {
+const Month = () => {
+  const { currentMonth } = useGlobalContext();
   return (
     <section className="month-grid">
       <GridLines />
       <div className=" calendar__month">
-        {month.map((row, index) => {
+        {currentMonth.map((row, index) => {
           if (
             dayjs(row[0]).week() === dayjs().week() &&
             dayjs(row[0]).year() === dayjs().year()

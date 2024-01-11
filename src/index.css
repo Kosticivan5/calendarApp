@@ -8,10 +8,10 @@
 }
 
 .calendar {
-  height: 100vh;
+  min-height: 100vh;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 1.5rem 0.5rem;
+  padding: 1.5rem 0.5rem 2.75rem;
   display: flex;
   flex-direction: column;
 }
@@ -82,14 +82,14 @@
   line-height: 1.25rem;
   /* padding: 0.25rem; */
   margin-left: 12px;
-  /* margin-bottom: 0.25rem; */
+  margin-bottom: 0.75rem;
   font-weight: 500;
 }
 
 .weekdays {
   display: flex;
   flex-direction: column;
-  background-color: #e9ecf1;
+  /* background-color: #e9ecf1; */
 }
 
 .weekdays__header {
@@ -353,6 +353,7 @@
   grid-column: 1 / span 5;
   row-gap: 4px;
   align-items: center;
+  grid-auto-flow: column;
 }
 
 .month-grid {
@@ -374,7 +375,7 @@
   z-index: -1;
   /* margin: 12px; */
   /* background-color: #fff; */
-  /* background-color: #e9ecf1; */
+  background-color: #e9ecf1;
   width: 100%;
   height: 100%;
 }

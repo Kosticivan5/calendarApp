@@ -8,13 +8,13 @@ import DaysOfWeek from "./components/DaysOfWeek";
 import SearchForm from "./components/SearchForm";
 
 function App() {
-  const [currentMonth, setCurrentMonth] = useState(getMonth());
+  // const [currentMonth, setCurrentMonth] = useState(getMonth());
 
-  const { monthIndex, setMonthIndex } = useGlobalContext();
+  // const { monthIndex, setMonthIndex } = useGlobalContext();
 
-  useEffect(() => {
-    setCurrentMonth(getMonth(monthIndex));
-  }, [monthIndex]);
+  // useEffect(() => {
+  //   setCurrentMonth(getMonth(monthIndex));
+  // }, [monthIndex]);
 
   return (
     <section className="calendar">
@@ -24,7 +24,7 @@ function App() {
         <div className="weekdays">
           <CalendarHeader />
           <DaysOfWeek />
-          <Month month={currentMonth} />
+          <Month />
         </div>
       </div>
     </section>
@@ -32,3 +32,4 @@ function App() {
 }
 
 export default App;
+// month = { currentMonth };
