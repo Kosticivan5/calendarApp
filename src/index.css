@@ -314,14 +314,21 @@
   font-weight: 500;
   font-size: 10px;
   margin: 0 0.25rem;
+
   /* width: 180px; */
 }
 
-.event p {
-  max-width: 17ch;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.multiWeekEventStart {
+  margin-right: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: none;
+}
+.multiWeekEventEnd {
+  margin-left: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left: none;
 }
 
 .week {
@@ -400,6 +407,18 @@
 }
 [data-span="5"] {
   grid-column-end: span 5;
+}
+[data-span="6"] {
+  grid-column-end: span 6;
+}
+[data-span="7"] {
+  grid-column-end: span 7;
+}
+[data-span="8"] {
+  grid-column-end: span 8;
+}
+[data-span="9"] {
+  grid-column-end: span 9;
 }
 
 [data-start="1"] {
