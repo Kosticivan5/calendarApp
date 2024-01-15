@@ -6,20 +6,19 @@ const Event = ({
   start_date,
   finish_date,
   multiWeek,
-  eventStart,
-  eventEnd,
-  titleLimit,
+  is_first,
+  is_last,
 }) => {
   // const [multiWeek, setMultiWeek] = useState(false);
   // const [spanTransfer, setSpanTransfer] = useState(0);
 
-  // const eventStart = dayjs(start_date).day();
+  const eventStart = dayjs(start_date).day();
 
-  // let eventEnd = dayjs(finish_date).diff(dayjs(start_date), "day");
-  // if (eventEnd < 1) {
-  //   eventEnd = 1;
-  // }
-  // const titleLimit = name.substring(0, 18);
+  let eventEnd = dayjs(finish_date).diff(dayjs(start_date), "day");
+  if (eventEnd < 1) {
+    eventEnd = 1;
+  }
+  const titleLimit = name.substring(0, 18);
 
   // useEffect(() => {
   //   const isMultiWeekEvent = (start, span) => {
@@ -57,16 +56,16 @@ const Event = ({
           ? "event dim"
           : "event"
       }
-      // style={
-      //   multiWeek
-      //     ? {
-      //         marginRight: 0,
-      //         borderTopRightRadius: 0,
-      //         borderBottomRightRadius: 0,
-      //         borderRight: "none",
-      //       }
-      //     : {}
-      // }
+      style={
+        is_first
+          ? {
+              marginRight: 0,
+              borderTopRightRadius: 0,
+              borderBottomRightRadius: 0,
+              borderRight: "none",
+            }
+          : {}
+      }
       data-start={eventStart}
       data-span={eventEnd}
     >

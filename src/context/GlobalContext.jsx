@@ -44,7 +44,9 @@ const AppContext = ({ children }) => {
         let newStartDate;
         let spanTransfer;
         let newDay;
-        let newEventStart;
+        let isFirst;
+        let isLast;
+        let isMiddle;
         for (
           let i = 0;
           i <= getWeeksBetweenDates(dayjs(start_date), dayjs(finish_date));
@@ -53,8 +55,23 @@ const AppContext = ({ children }) => {
           // Initialize variables for the new event
           if (i === 0) {
             newStartDate = start_date;
+            isFirst = true;
+          } else {
+            isFirst = false;
           }
-          console.log(newStartDate);
+          if (
+            i === getWeeksBetweenDates(dayjs(start_date), dayjs(finish_date))
+          ) {
+            isLast = true;
+          }
+
+          if (
+            i !== 0 &&
+            i !== getWeeksBetweenDates(dayjs(start_date), dayjs(finish_date))
+          ) {
+            isMiddle = true;
+          }
+          // console.log(newStartDate);
 
           // Calculate the day of the week for the initial event start date
           let eventStart = dayjs(newStartDate).day();
@@ -68,7 +85,7 @@ const AppContext = ({ children }) => {
             addDays = dayjs(finish_date).diff(newStartDate, "day");
           }
 
-          console.log(dayjs(finish_date).diff(newStartDate, "day"));
+          // console.log(dayjs(finish_date).diff(newStartDate, "day"));
 
           // Calculate the new finish date by adding allowed days to the start date
           let newFinishDate = dayjs(newStartDate).add(addDays, "day");
@@ -85,13 +102,17 @@ const AppContext = ({ children }) => {
             eventSpanEnd = 1;
           }
           // Check if the weeks are the same for the new events
-
+          // console.log(isFirst, isLast);
           // Create a new event object
           const newEvent = {
-            id: id,
+            id: nanoid(),
             name: name,
             start_date: dayjs(newStartDate).format(),
             finish_date: dayjs(newFinishDate).format(),
+            is_multiWeek: true,
+            is_first: isFirst,
+            is_last: isLast,
+            is_Middle: isMiddle,
           };
 
           // Update state with the new event
@@ -120,7 +141,6 @@ const AppContext = ({ children }) => {
     });
   }, []);
 
-  console.log(newData);
   return (
     <GlobalContext.Provider
       value={{
