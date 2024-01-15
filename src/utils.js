@@ -3,9 +3,13 @@ import dayjs from "dayjs";
 // global locale 'ru'
 import "dayjs/locale/ru";
 import * as localizedFormat from "dayjs/plugin/localizedFormat";
+import * as duration from "dayjs/plugin/duration";
 dayjs.extend(localizedFormat);
 dayjs.locale("ru");
 // ---
+
+dayjs.extend(duration);
+dayjs.duration();
 
 import * as weekOfYear from "dayjs/plugin/weekOfYear";
 dayjs.extend(weekOfYear);

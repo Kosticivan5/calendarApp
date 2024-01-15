@@ -81,7 +81,7 @@
   font-size: 1rem;
   line-height: 1.25rem;
   /* padding: 0.25rem; */
-  margin-left: 12px;
+  margin-left: 1.25rem;
   margin-bottom: 0.75rem;
   font-weight: 500;
 }
@@ -89,7 +89,7 @@
 .weekdays {
   display: flex;
   flex-direction: column;
-  /* background-color: #e9ecf1; */
+  background-color: #e9ecf1;
 }
 
 .weekdays__header {
@@ -103,7 +103,7 @@
   font-size: 1rem;
   line-height: 2.5rem;
   /* padding: 0.25rem; */
-  padding-left: 1.3rem;
+  padding-left: 1.25rem;
   background-color: #fff;
 }
 

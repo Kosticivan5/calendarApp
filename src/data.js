@@ -842,7 +842,7 @@ export const data = [
     class: "на рабочих местах",
     type: "webinar",
     start_date: "2024-01-12T08:50:00+00:00",
-    finish_date: "2024-01-19T10:00:00+00:00",
+    finish_date: "2024-01-30T10:00:00+00:00",
     is_passed: 0,
     company: "ПРОВАЙДЕР",
     Mandatorys: "0",
