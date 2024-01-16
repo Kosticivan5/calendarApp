@@ -8,6 +8,7 @@ import WeeklyEvents from "./WeeklyEvents";
 
 const Month = () => {
   const { currentMonth } = useGlobalContext();
+
   return (
     <section className="month-grid">
       <GridLines />

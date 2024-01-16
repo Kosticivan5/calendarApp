@@ -24,11 +24,6 @@ const AppContext = ({ children }) => {
     setCurrentMonth(getMonth(monthIndex));
   }, [monthIndex]);
 
-  // const handleMultiWeekEvents = useCallback(
-  //   (start, span, name) => {},
-  //   [currentMonth]
-  // );
-
   useMemo(() => {
     data.map((info) => {
       const { name, id, start_date, finish_date } = info;
@@ -53,25 +48,28 @@ const AppContext = ({ children }) => {
           i++
         ) {
           // Initialize variables for the new event
+
           if (i === 0) {
             newStartDate = start_date;
-            isFirst = true;
+            isFirst = 1;
           } else {
-            isFirst = false;
+            isFirst = 0;
           }
           if (
-            i === getWeeksBetweenDates(dayjs(start_date), dayjs(finish_date))
+            i ===
+            getWeeksBetweenDates(dayjs(start_date), dayjs(finish_date) - 1)
           ) {
-            isLast = true;
+            isLast = 1;
           }
 
           if (
-            i !== 0 &&
-            i !== getWeeksBetweenDates(dayjs(start_date), dayjs(finish_date))
+            i > 0 &&
+            i < getWeeksBetweenDates(dayjs(start_date), dayjs(finish_date) - 1)
           ) {
-            isMiddle = true;
+            isMiddle = 1;
+          } else {
+            isMiddle = 0;
           }
-          // console.log(newStartDate);
 
           // Calculate the day of the week for the initial event start date
           let eventStart = dayjs(newStartDate).day();
@@ -84,8 +82,6 @@ const AppContext = ({ children }) => {
           if (dayjs(finish_date).diff(newStartDate, "day") < allowedToSpan) {
             addDays = dayjs(finish_date).diff(newStartDate, "day");
           }
-
-          // console.log(dayjs(finish_date).diff(newStartDate, "day"));
 
           // Calculate the new finish date by adding allowed days to the start date
           let newFinishDate = dayjs(newStartDate).add(addDays, "day");
@@ -101,8 +97,7 @@ const AppContext = ({ children }) => {
           if (eventSpanEnd < 1) {
             eventSpanEnd = 1;
           }
-          // Check if the weeks are the same for the new events
-          // console.log(isFirst, isLast);
+
           // Create a new event object
           const newEvent = {
             id: nanoid(),
@@ -148,6 +143,7 @@ const AppContext = ({ children }) => {
         setMonthIndex,
         currentMonth,
         newData,
+        setNewData,
       }}
     >
       {/* {console.log(newData)} */}

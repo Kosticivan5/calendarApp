@@ -19,7 +19,6 @@ const CalendarHeader = () => {
   return (
     <header className="calendar__header">
       <div className="calendar__header--container">
-        <h2>{monthDisplayed}</h2>
         <div className="btn-container">
           <button onClick={handlePrevMonth} className="arrow left">
             <img src={leftArrow} alt="left-arrow" />
@@ -28,6 +27,7 @@ const CalendarHeader = () => {
             <img src={rightArrow} alt="right-arrow" />
           </button>
         </div>
+        <h2>{monthDisplayed}</h2>
       </div>
     </header>
   );
