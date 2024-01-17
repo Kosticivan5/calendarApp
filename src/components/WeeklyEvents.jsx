@@ -13,7 +13,6 @@ const WeeklyEvents = ({ row }) => {
       <div className="currentWeekDay">
         {row.map((day, idx) => {
           mapEvents.set(nanoid(), day);
-          console.table(monthIndex, dayjs(day).month());
 
           return <Day key={idx} day={day} rowIndex={idx} />;
         })}

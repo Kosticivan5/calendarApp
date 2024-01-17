@@ -24,31 +24,25 @@ const AppContext = ({ children }) => {
     setCurrentMonth(getMonth(monthIndex));
   }, [monthIndex]);
 
-  useMemo(() => {
+  const getData = useMemo(() => {
     data.map((info) => {
       const { name, id, start_date, finish_date } = info;
 
-      // ========
-
-      // Calculate the number of different weeks between start_date and finish_date
       getWeeksBetweenDates(dayjs(start_date), dayjs(finish_date));
 
-      // Check if start_date and finish_date fall into different weeks
       if (dayjs(start_date).week() !== dayjs(finish_date).week()) {
-        // Loop through the weeks between start_date and finish_date
         let newStartDate;
         let spanTransfer;
         let newDay;
         let isFirst;
         let isLast;
         let isMiddle;
+        let newFinishDate;
         for (
           let i = 0;
           i <= getWeeksBetweenDates(dayjs(start_date), dayjs(finish_date));
           i++
         ) {
-          // Initialize variables for the new event
-
           if (i === 0) {
             newStartDate = start_date;
             isFirst = 1;
@@ -71,10 +65,8 @@ const AppContext = ({ children }) => {
             isMiddle = 0;
           }
 
-          // Calculate the day of the week for the initial event start date
           let eventStart = dayjs(newStartDate).day();
 
-          // Calculate the number of days allowed to span to the end of the week
           const allowedToSpan = 6 - eventStart;
 
           let addDays = allowedToSpan;
@@ -83,22 +75,24 @@ const AppContext = ({ children }) => {
             addDays = dayjs(finish_date).diff(newStartDate, "day");
           }
 
-          // Calculate the new finish date by adding allowed days to the start date
-          let newFinishDate = dayjs(newStartDate).add(addDays, "day");
-          newFinishDate = dayjs(newFinishDate).format();
+          newFinishDate = dayjs(newStartDate).add(addDays, "day").format();
+          // newFinishDate = dayjs(newFinishDate).format();
 
-          // Calculate the number of days between the new start and finish dates
+          // if (dayjs(newStartDate).month() !== dayjs(newFinishDate).month()) {
+          //   let lastDayOfMonth = dayjs(newStartDate).endOf("month").format();
+          //   addDays = dayjs(lastDayOfMonth).diff(newStartDate, "day");
+          //   isLast = 0;
+          //   newFinishDate = dayjs(newStartDate).add(addDays, "day").format();
+          // }
           let eventSpanEnd = dayjs(finish_date).diff(
             dayjs(newStartDate),
             "day"
           );
 
-          // Ensure eventEnd is at least 1 day
           if (eventSpanEnd < 1) {
             eventSpanEnd = 1;
           }
 
-          // Create a new event object
           const newEvent = {
             id: nanoid(),
             name: name,
@@ -110,7 +104,8 @@ const AppContext = ({ children }) => {
             is_Middle: isMiddle,
           };
 
-          // Update state with the new event
+          console.log(newEvent);
+
           setNewData((newData) => [newEvent, ...newData]);
 
           if (eventSpanEnd > allowedToSpan) {
@@ -124,7 +119,6 @@ const AppContext = ({ children }) => {
             newDay = dayjs(newDay).add(1, "day");
           }
 
-          // update newStartDate
           newStartDate = newDay;
 
           const titleLimit = name.substring(0, 18);
@@ -146,7 +140,6 @@ const AppContext = ({ children }) => {
         setNewData,
       }}
     >
-      {/* {console.log(newData)} */}
       {children}
     </GlobalContext.Provider>
   );
