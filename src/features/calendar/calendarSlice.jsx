@@ -24,7 +24,7 @@ const initialState = {
   monthIndex: dayjs().month(),
   currentMonth: getMonth(),
   calendarDays: "",
-  processedEvents: "",
+  fullEvents: [],
   isLoading: false,
 };
 

@@ -1,4 +1,5 @@
 import dayjs from "dayjs";
+import { Link } from "react-router-dom";
 
 const Event = ({
   name,
@@ -8,6 +9,7 @@ const Event = ({
   is_first,
   is_last,
   is_Middle,
+  id,
 }) => {
   const eventStart = dayjs(start_date).day();
 
@@ -16,7 +18,8 @@ const Event = ({
   eventEnd += 1;
   const titleLimit = name.substring(0, 18);
   return (
-    <button
+    <Link
+      to="popup"
       className={dayjs(finish_date).isBefore(dayjs()) ? "event dim" : "event"}
       data-start={eventStart}
       data-span={eventEnd}
@@ -29,7 +32,7 @@ const Event = ({
           ? name
           : `${titleLimit}...`}
       </span>
-    </button>
+    </Link>
   );
 };
 

@@ -1,4 +1,22 @@
+import CalendarHeader from "../components/CalendarHeader";
+import Month from "../components/Month";
+import Sidebar from "../components/Sidebar";
+import DaysOfWeek from "../components/DaysOfWeek";
+import SearchForm from "../components/SearchForm";
+
 const CalendarDKO = () => {
-  return <div>CalendarDKO</div>;
+  return (
+    <section className="calendar">
+      <SearchForm />
+      <div className="calendar__wrapper">
+        <Sidebar />
+        <div className="weekdays">
+          <CalendarHeader />
+          <DaysOfWeek />
+          <Month />
+        </div>
+      </div>
+    </section>
+  );
 };
 export default CalendarDKO;
