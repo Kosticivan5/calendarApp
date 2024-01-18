@@ -16,13 +16,13 @@ const GlobalContext = createContext();
 export const useGlobalContext = () => useContext(GlobalContext);
 
 const AppContext = ({ children }) => {
-  const [monthIndex, setMonthIndex] = useState(dayjs().month());
-  const [currentMonth, setCurrentMonth] = useState(getMonth());
+  // const [monthIndex, setMonthIndex] = useState(dayjs().month());
+  // const [currentMonth, setCurrentMonth] = useState(getMonth());
   const [newData, setNewData] = useState([]);
 
-  useEffect(() => {
-    setCurrentMonth(getMonth(monthIndex));
-  }, [monthIndex]);
+  // useEffect(() => {
+  //   setCurrentMonth(getMonth(monthIndex));
+  // }, [monthIndex]);
 
   const getData = useMemo(() => {
     data.map((info) => {
@@ -133,9 +133,6 @@ const AppContext = ({ children }) => {
   return (
     <GlobalContext.Provider
       value={{
-        monthIndex,
-        setMonthIndex,
-        currentMonth,
         newData,
         setNewData,
       }}

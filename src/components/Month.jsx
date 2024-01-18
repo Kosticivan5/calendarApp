@@ -5,9 +5,12 @@ import dayjs from "dayjs";
 import { useGlobalContext } from "../context/GlobalContext";
 import Event from "./Event";
 import WeeklyEvents from "./WeeklyEvents";
+import { useSelector } from "react-redux";
 
 const Month = () => {
-  const { currentMonth } = useGlobalContext();
+  // const { currentMonth } = useGlobalContext();
+
+  const { currentMonth } = useSelector((store) => store.calendar);
 
   return (
     <section className="month-grid">

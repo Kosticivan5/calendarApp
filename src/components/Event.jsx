@@ -1,5 +1,4 @@
 import dayjs from "dayjs";
-import { useEffect, useState } from "react";
 
 const Event = ({
   name,
@@ -13,26 +12,9 @@ const Event = ({
   const eventStart = dayjs(start_date).day();
 
   let eventEnd = dayjs(finish_date).diff(dayjs(start_date), "day");
-  // if (eventEnd < 1) {
-  //   eventEnd = 1;
-  // }
+
   eventEnd += 1;
   const titleLimit = name.substring(0, 18);
-
-  // console.log(dayjs(start_date).format("YY MM DD"));
-
-  // console.table(
-  //   dayjs(start_date).format("YY-MM-DD"),
-  //   "___",
-  //   dayjs(start_date).day(),
-  //   "___",
-  //   dayjs(finish_date).format("YY-MM-DD"),
-  //   "___",
-  //   eventEnd,
-  //   "___",
-  //   dayjs(finish_date).diff(dayjs(start_date), "week")
-  // );
-  console.log(eventEnd);
   return (
     <button
       className={dayjs(finish_date).isBefore(dayjs()) ? "event dim" : "event"}

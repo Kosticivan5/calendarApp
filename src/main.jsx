@@ -3,11 +3,15 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
 import AppContext from "./context/GlobalContext.jsx";
+import { store } from "./store.jsx";
+import { Provider } from "react-redux";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <AppContext>
+    {/* <AppContext> */}
+    <Provider store={store}>
       <App />
-    </AppContext>
+    </Provider>
+    {/* </AppContext> */}
   </React.StrictMode>
 );

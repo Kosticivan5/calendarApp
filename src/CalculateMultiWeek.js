@@ -1,45 +1,45 @@
-import dayjs from "dayjs";
+// import dayjs from "dayjs";
 
-export const CalculateMultiWeek = (start_date, finish_date, name) => {
-  const eventStart = dayjs(start_date).day();
+// export const CalculateMultiWeek = (start_date, finish_date, name) => {
+//   const eventStart = dayjs(start_date).day();
 
-  let eventEnd = dayjs(finish_date).diff(dayjs(start_date), "day");
+//   let eventEnd = dayjs(finish_date).diff(dayjs(start_date), "day");
 
-  if (eventEnd < 1) {
-    eventEnd = 1;
-  }
-  const titleLimit = name.substring(0, 18);
+//   if (eventEnd < 1) {
+//     eventEnd = 1;
+//   }
+//   const titleLimit = name.substring(0, 18);
 
-  let newStartDate;
-  let spanTransfer;
-  let newDay;
-  let newEventStart;
+//   let newStartDate;
+//   let spanTransfer;
+//   let newDay;
+//   let newEventStart;
 
-  const allowedToSpan = 6 - eventStart;
-  if (eventEnd > allowedToSpan) {
-    spanTransfer = eventEnd - allowedToSpan;
-  }
-  newDay = dayjs(finish_date).subtract(spanTransfer, "day");
-  if (dayjs(newDay).get("day") === 6) {
-    newDay = dayjs(newDay).add(2, "day");
-  }
-  if (dayjs(newDay).get("day") === 0) {
-    newDay = dayjs(newDay).add(1, "day");
-  }
-  // mapEvents.set(nanoid(), newDay);
-  newStartDate = newDay;
-  newEventStart = dayjs(newStartDate).day();
+//   const allowedToSpan = 6 - eventStart;
+//   if (eventEnd > allowedToSpan) {
+//     spanTransfer = eventEnd - allowedToSpan;
+//   }
+//   newDay = dayjs(finish_date).subtract(spanTransfer, "day");
+//   if (dayjs(newDay).get("day") === 6) {
+//     newDay = dayjs(newDay).add(2, "day");
+//   }
+//   if (dayjs(newDay).get("day") === 0) {
+//     newDay = dayjs(newDay).add(1, "day");
+//   }
+//   // mapEvents.set(nanoid(), newDay);
+//   newStartDate = newDay;
+//   newEventStart = dayjs(newStartDate).day();
 
-  return {
-    newStartDate,
-    spanTransfer,
-    newDay,
-    newEventStart,
-    titleLimit,
-    eventStart,
-    eventEnd,
-  };
-};
+//   return {
+//     newStartDate,
+//     spanTransfer,
+//     newDay,
+//     newEventStart,
+//     titleLimit,
+//     eventStart,
+//     eventEnd,
+//   };
+// };
 
 export function getWeeksBetweenDates(startDate, endDate) {
   // Ensure start date is before end date

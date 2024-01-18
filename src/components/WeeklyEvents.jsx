@@ -3,10 +3,18 @@ import Event from "./Event";
 import dayjs from "dayjs";
 import { nanoid } from "nanoid";
 import { useGlobalContext } from "../context/GlobalContext";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect, useMemo } from "react";
+import { handleEvents } from "../features/calendar/calendarSlice";
 
 const WeeklyEvents = ({ row }) => {
   const mapEvents = new Map();
-  const { newData, monthIndex } = useGlobalContext();
+  // const { newData, monthIndex } = useGlobalContext();
+  const { calendarEvents } = useSelector((store) => store.calendar);
+  const dispatch = useDispatch();
+  // const getDate = useMemo(() => {
+  //   dispatch(handleEvents());
+  // }, []);
 
   return (
     <>
@@ -18,7 +26,7 @@ const WeeklyEvents = ({ row }) => {
         })}
       </div>
       <div className="events">
-        {newData.map((data) => {
+        {calendarEvents.map((data) => {
           const {
             id,
             name,
