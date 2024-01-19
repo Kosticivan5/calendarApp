@@ -1,11 +1,4 @@
-import { useEffect, useMemo } from "react";
-import CalendarHeader from "./components/CalendarHeader";
-import Month from "./components/Month";
-import Sidebar from "./components/Sidebar";
-import { getMonth } from "./utils";
-import { useGlobalContext } from "./context/GlobalContext";
-import DaysOfWeek from "./components/DaysOfWeek";
-import SearchForm from "./components/SearchForm";
+import { useEffect } from "react";
 import {
   getCalendarEvents,
   handleCurrentMonth,
@@ -18,13 +11,11 @@ import CalendarCORP from "./pages/CalendarCORP";
 import CalendarRETAIL from "./pages/CalendarRETAIL";
 import CalendarDRPZ from "./pages/CalendarDRPZ";
 import SharedLayout from "./pages/SharedLayout";
-import Popup from "./pages/Popup";
+import EventInfo from "./pages/EventInfo";
 
 function App() {
   const dispatch = useDispatch();
-  const { isLoading, monthIndex, calendarEvents } = useSelector(
-    (store) => store.calendar
-  );
+  const { isLoading, monthIndex } = useSelector((store) => store.calendar);
 
   useEffect(() => {
     dispatch(getCalendarEvents());
@@ -33,10 +24,6 @@ function App() {
   useEffect(() => {
     dispatch(handleCurrentMonth());
   }, [monthIndex]);
-
-  const getDate = useMemo(() => {
-    dispatch(handleEvents());
-  }, []);
 
   if (isLoading) {
     return (
@@ -51,16 +38,16 @@ function App() {
       <Routes>
         <Route path="/" element={<SharedLayout />}>
           <Route path="calendarDKO" element={<CalendarDKO />}>
-            <Route path="popup" element={<Popup />} />
+            <Route path="even-info/:id" element={<EventInfo />} />
           </Route>
           <Route path="calendarCORP" element={<CalendarCORP />} />
           <Route path="CalendarRETAIL" element={<CalendarRETAIL />} />
           <Route path="CalendarDRPZ" element={<CalendarDRPZ />} />
         </Route>
+        <Route path="*" element={<div>404 Erorr</div>} />
       </Routes>
     </HashRouter>
   );
 }
 
 export default App;
-// month = { currentMonth };

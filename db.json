@@ -3427,6 +3427,75 @@
       "registred": 0,
 
       "in_wlist": 0
+    },
+    {
+      "id": "7322364008862849962long1",
+
+      "name": "multiweek event",
+
+      "local_time_string": "",
+
+      "event_max_pers": 50,
+
+      "is_open": 1,
+
+      "price": "",
+
+      "is_single_person_price": 0,
+
+      "description": "Коллеги",
+
+      "calendar_group": 0,
+
+      "type_no_access": "",
+
+      "for_type": "spec][Для специалистов;boss][Для руководителей",
+
+      "event_rb_type": "tle][Тренинги личной эффективности",
+
+      "beexpert": 0,
+
+      "is_devops": 0,
+
+      "starting": 0,
+
+      "is_la": 0,
+
+      "type_val": "fa-heart][Вовлеченность",
+
+      "hub": "west_hub][Западный хаб;east_hub][Восточный хаб;all_locations][Все города",
+
+      "type_detailed": "type_webinar][Вебинар",
+
+      "place": "Вне учебного класса",
+
+      "class": "Онлайн",
+
+      "type": "webinar",
+
+      "start_date": "2024-01-16T08:25:00+00:00",
+
+      "finish_date": "2024-01-24T09:00:00+00:00",
+
+      "organizational_form": "internal",
+
+      "isMandatory": "Не обязательное",
+
+      "event_form": "webinar",
+
+      "calendar_show": true,
+
+      "is_passed": 0,
+
+      "company": "Дозорова Виктория Эдуардовна",
+
+      "Mandatorys": "0",
+
+      "max_pers": 48,
+
+      "registred": 0,
+
+      "in_wlist": 0
     }
   ]
 }

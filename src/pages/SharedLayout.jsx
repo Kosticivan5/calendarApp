@@ -6,7 +6,7 @@ const SharedLayout = () => {
     <>
       <div className="banner">
         <img src="banner.jpg" alt="" />
-        <h1>Календарь</h1>
+        <p>Календарь</p>
       </div>
       <CalendarNavBar />
       <Outlet />

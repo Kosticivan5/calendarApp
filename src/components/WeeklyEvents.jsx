@@ -43,6 +43,7 @@ const WeeklyEvents = ({ row }) => {
               return (
                 <Event
                   key={id}
+                  id={id}
                   start_date={start_date}
                   finish_date={finish_date}
                   name={name}
