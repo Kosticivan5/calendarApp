@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import {
   getCalendarEvents,
   handleCurrentMonth,
@@ -17,7 +17,7 @@ function App() {
   const dispatch = useDispatch();
   const { isLoading, monthIndex } = useSelector((store) => store.calendar);
 
-  useEffect(() => {
+  useMemo(() => {
     dispatch(getCalendarEvents());
   }, []);
 
