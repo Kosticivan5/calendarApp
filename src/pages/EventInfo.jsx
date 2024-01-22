@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
 import { GrClose } from "react-icons/gr";
 import { CiCalendar } from "react-icons/ci";
 import { CiClock2 } from "react-icons/ci";
@@ -14,10 +14,7 @@ const EventInfo = () => {
 
   const ev = calendarEvents.find((event) => event.id === eventId);
 
-  // console.log(
-  //   dayjs(ev.start_date).format("DD.MM.YYYY"),
-  //   dayjs(ev.start_date).format("LT")
-  // );
+  const urlAddress = window.location.href;
 
   return (
     <>
@@ -34,42 +31,85 @@ const EventInfo = () => {
           <div className="time-date-container">
             <div className="date">
               <CiCalendar />
-              <p>{dayjs(ev.start_date).format("LT")}</p>
+              {ev.old_start_date && ev.old_finish_date ? (
+                <>
+                  <p>{dayjs(ev.old_start_date).format(" D MMMM")}</p>
+                  <p>{dayjs(ev.old_start_date).format("LT")}</p>
+                </>
+              ) : (
+                <>
+                  <p>{dayjs(ev.start_date).format(" D MMMM")}</p>
+                  <p>{dayjs(ev.start_date).format("LT")}</p>
+                </>
+              )}
+
               <p>мск</p>
             </div>
             <div className="time">
               <CiClock2 />
-              <p>40 минут</p>
+              <p>
+                {ev.old_start_date && ev.old_finish_date
+                  ? dayjs
+                      .duration(
+                        dayjs(ev.old_finish_date).diff(
+                          dayjs(ev.old_start_date).add(1, "day")
+                        )
+                      )
+                      .humanize()
+                  : dayjs
+                      .duration(
+                        dayjs(ev.finish_date).diff(dayjs(ev.start_date))
+                      )
+                      .humanize()}
+              </p>
             </div>
           </div>
-          <div className="share">
+          <button
+            className="share"
+            onClick={() => navigator.clipboard.writeText(urlAddress)}
+          >
             <CiShare2 />
             <p>Поделиться</p>
-          </div>
+          </button>
         </header>
         {/* event info center */}
         <section className="event-info-center">
           <div className="type">
             <PiMonitorPlayLight />
-            <p>Очно</p>
+            <p>{ev.class}</p>
           </div>
           <h2 className="info-title">{ev.name}</h2>
 
           <div className="info-text">
             <p>Начало</p>
-            <p>
-              {dayjs(ev.start_date).format("DD.MM.YYYY")}{" "}
-              {dayjs(ev.start_date).format("LT")} мск
-            </p>
+            {ev.old_start_date ? (
+              <p>
+                {dayjs(ev.old_start_date).format("DD.MM.YYYY")}{" "}
+                {dayjs(ev.old_start_date).format("LT")} мск
+              </p>
+            ) : (
+              <p>
+                {dayjs(ev.start_date).format("DD.MM.YYYY")}{" "}
+                {dayjs(ev.start_date).format("LT")} мск
+              </p>
+            )}
             <p>Завершение</p>
-            <p>
-              {dayjs(ev.finish_date).format("DD.MM.YYYY")}{" "}
-              {dayjs(ev.finish_date).format("LT")} мск
-            </p>
+            {ev.old_finish_date ? (
+              <p>
+                {dayjs(ev.old_finish_date).format("DD.MM.YYYY")}{" "}
+                {dayjs(ev.old_finish_date).format("LT")} мск
+              </p>
+            ) : (
+              <p>
+                {dayjs(ev.finish_date).format("DD.MM.YYYY")}{" "}
+                {dayjs(ev.finish_date).format("LT")} мск
+              </p>
+            )}
+
             <p>Регион</p>
             <p>Нижний Новгород, Самара, Красноярск</p>
             <p>Преподаватель</p>
-            <p>Гаджимурадова Мадина Муратбековна </p>
+            <p>{ev.company} </p>
             <p>Направление</p>
             <p>Личная пятница</p>
             <p>Друзья, приглашаем вам на вебинар в рамках проекта BeExpert.</p>

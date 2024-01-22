@@ -38,7 +38,7 @@ function App() {
       <Routes>
         <Route path="/" element={<SharedLayout />}>
           <Route path="calendarDKO" element={<CalendarDKO />}>
-            <Route path="even-info/:id" element={<EventInfo />} />
+            <Route path="event-info/:id" element={<EventInfo />} />
           </Route>
           <Route path="calendarCORP" element={<CalendarCORP />} />
           <Route path="CalendarRETAIL" element={<CalendarRETAIL />} />

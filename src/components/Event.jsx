@@ -12,6 +12,7 @@ const Event = ({
   is_last,
   is_Middle,
   id,
+  old_id,
 }) => {
   const eventStart = dayjs(start_date).day();
   let eventEnd = dayjs(finish_date).diff(dayjs(start_date), "day");
@@ -21,7 +22,7 @@ const Event = ({
   const titleLimit = name.substring(0, 18);
   return (
     <Link
-      to={`even-info/${id}`}
+      to={`event-info/${id}`}
       className={dayjs(finish_date).isBefore(dayjs()) ? "event dim" : "event"}
       data-start={eventStart}
       data-span={eventEnd}

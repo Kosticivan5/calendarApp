@@ -6,12 +6,16 @@ import { nanoid } from "nanoid";
 import "dayjs/locale/ru";
 import * as localizedFormat from "dayjs/plugin/localizedFormat";
 import * as duration from "dayjs/plugin/duration";
+import * as relativeTime from "dayjs/plugin/relativeTime";
+import * as updateLocale from "dayjs/plugin/updateLocale";
 dayjs.extend(localizedFormat);
 dayjs.locale("ru");
 // ---
-
 dayjs.extend(duration);
 dayjs.duration();
+// ---
+dayjs.extend(relativeTime);
+// ---
 
 import * as weekOfYear from "dayjs/plugin/weekOfYear";
 dayjs.extend(weekOfYear);
@@ -32,6 +36,18 @@ export const getMonth = (month = dayjs().month()) => {
     }
     return new Array(5).fill(null).map(() => {
       currentMonthCount++;
+      // console.log(
+      //   dayjs(new Date(year, month, currentMonthCount)).format("DD MM YY"),
+      //   dayjs(new Date(year, month, currentMonthCount)).month(),
+      //   month
+      // );
+      console.log(year);
+      if (
+        dayjs(new Date(year, month, currentMonthCount)).format("MMMM") !==
+        dayjs(new Date(year, month, 1)).format("MMMM")
+      ) {
+        return "";
+      }
       return dayjs(new Date(year, month, currentMonthCount));
     });
   });
@@ -43,7 +59,40 @@ export const getMonth = (month = dayjs().month()) => {
 export const getNewData = (data) => {
   let newData = [];
   data.map((info) => {
-    const { name, id, start_date, finish_date } = info;
+    const {
+      name,
+      id,
+      start_date,
+      finish_date,
+      local_time_string,
+      event_max_pers,
+      is_open,
+      price,
+      is_single_person_price,
+      description,
+      calendar_group,
+      type_no_access,
+      for_type,
+      event_rb_type,
+      beexpert,
+      is_devops,
+      starting,
+      is_la,
+      type_val,
+      type_detailed,
+      place,
+      type,
+      organizational_form,
+      isMandatory,
+      event_form,
+      calendar_show,
+      is_passed,
+      company,
+      Mandatorys,
+      max_pers,
+      registred,
+      in_wlist,
+    } = info;
 
     getWeeksBetweenDates(dayjs(start_date), dayjs(finish_date));
 
@@ -55,6 +104,7 @@ export const getNewData = (data) => {
       let isLast;
       let isMiddle;
       let newFinishDate;
+      let idCounter = 0;
       for (
         let i = 0;
         i <= getWeeksBetweenDates(dayjs(start_date), dayjs(finish_date));
@@ -106,16 +156,50 @@ export const getNewData = (data) => {
           eventSpanEnd = 1;
         }
 
-        const newEvent = {
-          id: nanoid(),
-          name: name,
+        let newEvent = {
+          id: `${id}mw${idCounter}`,
+          name,
           start_date: dayjs(newStartDate).format(),
           finish_date: dayjs(newFinishDate).format(),
           is_multiWeek: true,
           is_first: isFirst,
           is_last: isLast,
           is_Middle: isMiddle,
+          old_start_date: start_date,
+          old_finish_date: finish_date,
+          // ============
+          local_time_string,
+          event_max_pers,
+          is_open,
+          price,
+          is_single_person_price,
+          description,
+          calendar_group,
+          type_no_access,
+          for_type,
+          event_rb_type,
+          beexpert,
+          is_devops,
+          starting,
+          is_la,
+          type_val,
+          type_detailed,
+          place,
+          class: info.class,
+          type,
+          organizational_form,
+          isMandatory,
+          event_form,
+          calendar_show,
+          is_passed,
+          company,
+          Mandatorys,
+          max_pers,
+          registred,
+          in_wlist,
         };
+
+        idCounter += 1;
 
         //   setNewData((newData) => [newEvent, ...newData]);
         newData = [newEvent, ...newData];

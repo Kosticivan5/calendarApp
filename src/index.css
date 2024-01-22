@@ -638,12 +638,20 @@
   display: flex;
   align-items: center;
   gap: 6px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+
+.event-info-header .share:active {
+  transform: scale(1.02);
 }
 
 .info-text {
   display: grid;
   grid-template-columns: min-content 1fr;
-  grid-template-rows: repeat(5, 1fr);
+  grid-template-rows: repeat(5, min-content);
   column-gap: 2rem;
   row-gap: 0.5rem;
   font-size: 14px;

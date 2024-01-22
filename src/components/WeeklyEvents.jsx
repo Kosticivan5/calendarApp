@@ -2,7 +2,7 @@ import Day from "./Day";
 import Event from "./Event";
 import dayjs from "dayjs";
 import { nanoid } from "nanoid";
-import { useGlobalContext } from "../context/GlobalContext";
+// import { useGlobalContext } from "../context/GlobalContext";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useMemo } from "react";
 import { handleEvents } from "../features/calendar/calendarSlice";
@@ -51,6 +51,7 @@ const WeeklyEvents = ({ row }) => {
                   is_first={is_first}
                   is_last={is_last}
                   is_Middle={is_Middle}
+                  {...data}
                 />
               );
             }

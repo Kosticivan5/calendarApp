@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
-import AppContext from "./context/GlobalContext.jsx";
+// import AppContext from "./context/GlobalContext.jsx";
 import { store } from "./store.jsx";
 import { Provider } from "react-redux";
 
