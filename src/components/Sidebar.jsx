@@ -1,3 +1,6 @@
+import FormatDropdown from "./FormatDropdown";
+import TypesDropdown from "./TypesDropdown";
+
 const Sidebar = () => {
   return (
     <aside className="sidebar">
@@ -14,20 +17,8 @@ const Sidebar = () => {
 
         {/* select filters */}
         <div className="select-input">
-          <select name="" id="">
-            <option value="">Формат</option>
-            <option value="">Дистанционно</option>
-            <option value="">Очно</option>
-          </select>
-          <select name="" id="">
-            <option value="">Направление</option>
-            <option value="">Персональная эффективность</option>
-            <option value="">Лидерские навыки</option>
-            <option value="">Digital & IT</option>
-            <option value="">Проектные и продуктовые технологии</option>
-            <option value="">Банки и финансы</option>
-            <option value="">Клиентоцентричность</option>
-          </select>
+          <FormatDropdown />
+          <TypesDropdown />
         </div>
         {/* bottom checkbox filters */}
         <div className="checkbox-input">

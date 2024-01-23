@@ -20,8 +20,6 @@ const CalendarHeader = () => {
     "MMMM YYYY"
   );
 
-  console.log(monthDisplayed);
-
   return (
     <header className="calendar__header">
       <div className="calendar__header--container">

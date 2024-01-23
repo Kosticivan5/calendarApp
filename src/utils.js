@@ -41,7 +41,7 @@ export const getMonth = (month = dayjs().month()) => {
       //   dayjs(new Date(year, month, currentMonthCount)).month(),
       //   month
       // );
-      console.log(year);
+
       if (
         dayjs(new Date(year, month, currentMonthCount)).format("MMMM") !==
         dayjs(new Date(year, month, 1)).format("MMMM")

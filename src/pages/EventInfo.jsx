@@ -60,7 +60,7 @@ const EventInfo = () => {
                       .duration(
                         dayjs(ev.finish_date).diff(dayjs(ev.start_date))
                       )
-                      .humanize()}
+                      .format("H[h].m[m]")}
               </p>
             </div>
           </div>

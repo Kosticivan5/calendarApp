@@ -2,8 +2,6 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import dayjs from "dayjs";
 import axios from "axios";
 import { getMonth, getNewData } from "../../utils";
-import { getWeeksBetweenDates } from "../../CalculateMultiWeek";
-import { nanoid } from "nanoid";
 
 const url = "http://localhost:3000/events";
 
