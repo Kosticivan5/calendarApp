@@ -42,9 +42,6 @@ const calendarSlice = createSlice({
     handleCurrentMonth: (state, action) => {
       state.currentMonth = getMonth(state.monthIndex);
     },
-    // handleEvents: (state, action) => {
-    //   state.calendarEvents = newData;
-    // },
   },
   extraReducers: (builder) => {
     builder

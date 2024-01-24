@@ -6,13 +6,16 @@ import { CiClock2 } from "react-icons/ci";
 import { CiShare2 } from "react-icons/ci";
 import { PiMonitorPlayLight } from "react-icons/pi";
 import dayjs from "dayjs";
+import formatDurationInRussian from "../getTimeConverted";
 
 const EventInfo = () => {
   const { calendarEvents } = useSelector((store) => store.calendar);
 
   const { id: eventId } = useParams();
 
-  const ev = calendarEvents.find((event) => event.id === eventId);
+  const ev = calendarEvents.find(
+    (event) => event.path_id === eventId || event.id === eventId
+  );
 
   const urlAddress = window.location.href;
 
@@ -56,11 +59,7 @@ const EventInfo = () => {
                         )
                       )
                       .humanize()
-                  : dayjs
-                      .duration(
-                        dayjs(ev.finish_date).diff(dayjs(ev.start_date))
-                      )
-                      .format("H[h].m[m]")}
+                  : formatDurationInRussian(ev.start_date, ev.finish_date)}
               </p>
             </div>
           </div>
@@ -109,10 +108,11 @@ const EventInfo = () => {
             <p>Регион</p>
             <p>Нижний Новгород, Самара, Красноярск</p>
             <p>Преподаватель</p>
-            <p>{ev.company} </p>
+            {<div dangerouslySetInnerHTML={{ __html: ev.company }} />}
+            {/* <p>{ev.company} </p> */}
             <p>Направление</p>
             <p>Личная пятница</p>
-            <p>Друзья, приглашаем вам на вебинар в рамках проекта BeExpert.</p>
+            <p dangerouslySetInnerHTML={{ __html: ev.description }} />
           </div>
         </section>
         <div className="info-button-container">

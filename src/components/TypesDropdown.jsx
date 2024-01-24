@@ -12,6 +12,7 @@ const TypesDropdown = () => {
   return (
     <>
       <button
+        type="button"
         onClick={() => dispatch(toggleDropdown())}
         className="type-select"
       >

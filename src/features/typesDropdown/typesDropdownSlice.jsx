@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   info: "Направление",
   isOpen: false,
+  value: "",
 };
 
 const typesDropdownSlice = createSlice({
@@ -15,6 +16,7 @@ const typesDropdownSlice = createSlice({
     selectFormat: (state, action) => {
       state.info = action.payload;
       state.isOpen = !state.isOpen;
+      state.value = action.payload;
     },
   },
 });

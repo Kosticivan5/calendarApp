@@ -11,6 +11,7 @@ const WeeklyEvents = ({ row }) => {
   const mapEvents = new Map();
   // const { newData, monthIndex } = useGlobalContext();
   const { calendarEvents } = useSelector((store) => store.calendar);
+  const { filteredEvents } = useSelector((store) => store.searchBarFilter);
 
   return (
     <>

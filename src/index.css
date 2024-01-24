@@ -723,10 +723,16 @@
 }
 
 .info-text p:last-child {
-  color: #000;
   grid-column-start: 1;
   grid-column-end: 3;
   padding-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.info-text p:last-child * {
+  color: #000;
 }
 
 .info-button-container button {

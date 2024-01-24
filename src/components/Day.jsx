@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 // import { useGlobalContext } from "../context/GlobalContext";
-import Event from "./Event";
-import { data } from "../data";
+// import Event from "./Event";
+// import { data } from "../data";
 
 const Day = ({ day, rowIndex }) => {
   // current day

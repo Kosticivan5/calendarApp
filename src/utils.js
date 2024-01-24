@@ -20,6 +20,8 @@ dayjs.extend(relativeTime);
 import * as weekOfYear from "dayjs/plugin/weekOfYear";
 dayjs.extend(weekOfYear);
 
+// ===================--=================
+
 // get month
 export const getMonth = (month = dayjs().month()) => {
   const year = dayjs().year();
@@ -36,12 +38,6 @@ export const getMonth = (month = dayjs().month()) => {
     }
     return new Array(5).fill(null).map(() => {
       currentMonthCount++;
-      // console.log(
-      //   dayjs(new Date(year, month, currentMonthCount)).format("DD MM YY"),
-      //   dayjs(new Date(year, month, currentMonthCount)).month(),
-      //   month
-      // );
-
       if (
         dayjs(new Date(year, month, currentMonthCount)).format("MMMM") !==
         dayjs(new Date(year, month, 1)).format("MMMM")
@@ -54,6 +50,8 @@ export const getMonth = (month = dayjs().month()) => {
 
   return daysMatrix;
 };
+
+// =========================--=======================
 
 // reduced data
 export const getNewData = (data) => {
@@ -157,6 +155,7 @@ export const getNewData = (data) => {
         }
 
         let newEvent = {
+          path_id: id,
           id: `${id}mw${idCounter}`,
           name,
           start_date: dayjs(newStartDate).format(),
@@ -228,3 +227,5 @@ export const getNewData = (data) => {
 
   return newData;
 };
+
+// ===========--===========

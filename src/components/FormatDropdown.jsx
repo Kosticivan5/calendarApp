@@ -12,6 +12,7 @@ const FormatDropdown = () => {
   return (
     <>
       <button
+        type="button"
         onClick={() => dispatch(toggleDropdown())}
         className="format-select"
       >
