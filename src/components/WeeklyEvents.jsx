@@ -12,6 +12,7 @@ const WeeklyEvents = ({ row }) => {
   // const { newData, monthIndex } = useGlobalContext();
   const { calendarEvents } = useSelector((store) => store.calendar);
   const { filteredEvents } = useSelector((store) => store.searchBarFilter);
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -35,6 +36,19 @@ const WeeklyEvents = ({ row }) => {
             is_Middle,
           } = data;
 
+          // const splitHub = () => {
+          //   if (data.hub) {
+          //     const splited = data.hub.split(";");
+
+          //     const cities = splited.map((item) => {
+          //       return item.split("][")[1];
+          //     });
+          //     console.log(cities);
+          //   }
+          // };
+
+          // splitHub();
+          console.log(data.type);
           for (const day of mapEvents.values()) {
             if (
               dayjs(day).week() === dayjs(start_date).week() &&

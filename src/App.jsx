@@ -12,10 +12,13 @@ import CalendarRETAIL from "./pages/CalendarRETAIL";
 import CalendarDRPZ from "./pages/CalendarDRPZ";
 import SharedLayout from "./pages/SharedLayout";
 import EventInfo from "./pages/EventInfo";
+import { handleSearchBarEvents } from "./features/Searchbar/searchbarSlice";
 
 function App() {
   const dispatch = useDispatch();
-  const { isLoading, monthIndex } = useSelector((store) => store.calendar);
+  const { isLoading, monthIndex, calendarEvents } = useSelector(
+    (store) => store.calendar
+  );
 
   useMemo(() => {
     dispatch(getCalendarEvents());
@@ -24,6 +27,10 @@ function App() {
   useEffect(() => {
     dispatch(handleCurrentMonth());
   }, [monthIndex]);
+
+  // useEffect(() => {
+  //   dispatch(handleSearchBarEvents(calendarEvents));
+  // }, [calendarEvents]);
 
   if (isLoading) {
     return (
