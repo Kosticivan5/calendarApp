@@ -5,14 +5,20 @@ import {
   handleEvents,
 } from "./features/calendar/calendarSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { HashRouter, Routes, Route } from "react-router-dom";
+import {
+  HashRouter,
+  Routes,
+  Route,
+  createHashRouter,
+  RouterProvider,
+} from "react-router-dom";
 import CalendarDKO from "./pages/CalendarDKO";
 import CalendarCORP from "./pages/CalendarCORP";
 import CalendarRETAIL from "./pages/CalendarRETAIL";
 import CalendarDRPZ from "./pages/CalendarDRPZ";
 import SharedLayout from "./pages/SharedLayout";
 import EventInfo from "./pages/EventInfo";
-import { handleSearchBarEvents } from "./features/Searchbar/searchbarSlice";
+import Sidebar from "./components/Sidebar";
 
 function App() {
   const dispatch = useDispatch();
@@ -40,20 +46,55 @@ function App() {
     );
   }
 
+  const router = createHashRouter([
+    {
+      path: "/",
+      element: <SharedLayout />,
+      children: [
+        {
+          path: "calendarDKO",
+          element: <CalendarDKO />,
+          children: [
+            { index: true, element: <Sidebar /> },
+            { path: "event-info/:id", element: <EventInfo /> },
+          ],
+        },
+        {
+          path: "CalendarCORP",
+          element: <CalendarCORP />,
+        },
+        {
+          path: "CalendarRETAIL",
+          element: <CalendarRETAIL />,
+        },
+        {
+          path: "CalendarDRPZ",
+          element: <CalendarDRPZ />,
+        },
+      ],
+    },
+    {
+      path: "*",
+      element: <h1>404 Erorr</h1>,
+    },
+  ]);
+
   return (
-    <HashRouter>
-      <Routes>
-        <Route path="/" element={<SharedLayout />}>
-          <Route path="calendarDKO" element={<CalendarDKO />}>
-            <Route path="event-info/:id" element={<EventInfo />} />
-          </Route>
-          <Route path="calendarCORP" element={<CalendarCORP />} />
-          <Route path="CalendarRETAIL" element={<CalendarRETAIL />} />
-          <Route path="CalendarDRPZ" element={<CalendarDRPZ />} />
-        </Route>
-        <Route path="*" element={<div>404 Erorr</div>} />
-      </Routes>
-    </HashRouter>
+    <RouterProvider router={router} />
+
+    // <HashRouter>
+    //   <Routes>
+    //     <Route path="/" element={<SharedLayout />}>
+    //       <Route path="calendarDKO" element={<CalendarDKO />}>
+    //         <Route path="event-info/:id" element={<EventInfo />} />
+    //       </Route>
+    //       <Route path="calendarCORP" element={<CalendarCORP />} />
+    //       <Route path="CalendarRETAIL" element={<CalendarRETAIL />} />
+    //       <Route path="CalendarDRPZ" element={<CalendarDRPZ />} />
+    //     </Route>
+    //     <Route path="*" element={<div>404 Erorr</div>} />
+    //   </Routes>
+    // </HashRouter>
   );
 }
 

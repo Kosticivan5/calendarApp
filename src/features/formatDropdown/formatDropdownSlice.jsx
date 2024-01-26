@@ -16,7 +16,9 @@ const FormatDropdownSlice = createSlice({
     selectFormat: (state, action) => {
       state.info = action.payload;
       state.isOpen = !state.isOpen;
-      state.value = action.payload;
+      const stateValue = (value) =>
+        value === "Дистанционно" ? "webinar" : "training";
+      state.value = stateValue(action.payload);
     },
   },
 });

@@ -1,49 +1,51 @@
 import { CiSearch } from "react-icons/ci";
-import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
-import { handleSearchBarEvents } from "../features/Searchbar/searchbarSlice";
-import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import {
+  handleSearchBarChange,
+  resetSearchBarValue,
+} from "../features/Searchbar/searchbarSlice";
+import { useMemo, useState } from "react";
 import { GrClose } from "react-icons/gr";
 
+import { Form, useLoaderData, Link } from "react-router-dom";
+
 const SearchForm = () => {
-  const { register, handleSubmit, formState, reset, submittedData } = useForm({
-    defaultValues: { searchBarValue: "" },
-  });
+  const [value, setValue] = useState("");
+
   const dispatch = useDispatch();
-  const { calendarEvents } = useSelector((store) => store.calendar);
 
-  const onSubmit = (data) => {
-    if (data.searchBarValue === "") {
-      dispatch(handleSearchBarEvents(calendarEvents));
-      return;
-    }
-
-    const filteredEvents = calendarEvents.filter(
-      (event) =>
-        !event.name.toLowerCase().includes(data.searchBarValue.toLowerCase())
-    );
-    console.log(filteredEvents);
-    dispatch(handleSearchBarEvents(filteredEvents));
-  };
-
-  useEffect(() => {
-    if (formState.isSubmitSuccessful) {
-      reset({ searchBarValue: "" });
-    }
-  }, [formState, submittedData, reset]);
+  const handleChange = useMemo(() => {
+    let timeoutId;
+    return (e) => {
+      clearTimeout(timeoutId);
+      setValue(e.target.value);
+      timeoutId = setTimeout(() => {
+        dispatch(handleSearchBarChange(e.target.value));
+      }, 1000);
+    };
+  }, []);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="search-form">
+    <form className="search-form">
       <div className="search-input-container">
         <CiSearch className="search-icon" />
         <input
-          {...register("searchBarValue")}
+          onChange={handleChange}
           type="text"
+          name="search-field"
+          value={value}
           className="search-form__input"
           placeholder="Поиск внутри календаря"
         />
-        <button className="search-reset-icon">
-          <GrClose />
+        <button
+          onClick={() => {
+            dispatch(resetSearchBarValue(""));
+            setValue("");
+          }}
+          type="button"
+          className="search-reset-icon"
+        >
+          {value.length > 0 && <GrClose />}
         </button>
       </div>
       <button className="search-form__btn" type="submit">

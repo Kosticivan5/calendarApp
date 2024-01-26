@@ -48,7 +48,6 @@ const WeeklyEvents = ({ row }) => {
           // };
 
           // splitHub();
-          console.log(data.type);
           for (const day of mapEvents.values()) {
             if (
               dayjs(day).week() === dayjs(start_date).week() &&

@@ -3667,7 +3667,7 @@
       "digital_it": 0,
       "design_prod_tech": 0,
       "bank_finance": 0,
-      "customer_orient": 0,
+      "customer_orient": 1,
 
       "type_no_access": "",
 
@@ -3680,7 +3680,7 @@
       "is_devops": 0,
 
       "starting": 0,
-      "learn_own": 0,
+      "learn_own": 1,
       "lead_academy": 0,
       "lead_friday": 0,
       "digital_lit": 0,
@@ -3747,7 +3747,7 @@
       "lead_skill": 0,
       "digital_it": 0,
       "design_prod_tech": 0,
-      "bank_finance": 0,
+      "bank_finance": 1,
       "customer_orient": 0,
 
       "type_no_access": "",
@@ -3765,7 +3765,7 @@
       "lead_academy": 0,
       "lead_friday": 0,
       "digital_lit": 0,
-      "finance_lit": 0,
+      "finance_lit": 1,
 
       "is_la": 0,
 
@@ -3827,7 +3827,7 @@
       "person_effect": 0,
       "lead_skill": 0,
       "digital_it": 0,
-      "design_prod_tech": 0,
+      "design_prod_tech": 1,
       "bank_finance": 0,
       "customer_orient": 0,
 
@@ -3844,7 +3844,7 @@
       "starting": 0,
       "learn_own": 0,
       "lead_academy": 0,
-      "lead_friday": 0,
+      "lead_friday": 1,
       "digital_lit": 0,
       "finance_lit": 0,
 
@@ -3904,7 +3904,7 @@
       "description": "Коллеги",
 
       "calendar_group": 0,
-      "person_effect": 0,
+      "person_effect": 1,
       "lead_skill": 0,
       "digital_it": 0,
       "design_prod_tech": 0,
@@ -3922,7 +3922,7 @@
       "is_devops": 0,
 
       "starting": 0,
-      "learn_own": 0,
+      "learn_own": 1,
       "lead_academy": 0,
       "lead_friday": 0,
       "digital_lit": 0,
@@ -3985,7 +3985,7 @@
 
       "calendar_group": 0,
       "person_effect": 0,
-      "lead_skill": 0,
+      "lead_skill": 1,
       "digital_it": 0,
       "design_prod_tech": 0,
       "bank_finance": 0,
@@ -4003,7 +4003,7 @@
 
       "starting": 0,
       "learn_own": 0,
-      "lead_academy": 0,
+      "lead_academy": 1,
       "lead_friday": 0,
       "digital_lit": 0,
       "finance_lit": 0,

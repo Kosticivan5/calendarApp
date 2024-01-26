@@ -1,38 +1,23 @@
 import FormatDropdown from "./FormatDropdown";
 import TypesDropdown from "./TypesDropdown";
-import { useForm } from "react-hook-form";
+
+import { Form } from "react-router-dom";
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+};
 
 const Sidebar = () => {
-  const { register, handleSubmit, watch, formState } = useForm();
-  // console.log(register);
-
-  const onSubmit = (data) => {
-    console.log(data);
-    // console.log(watch("mine"));
-    console.log("Mine checkbox checked:", mineChecked);
-    console.log("Managers checkbox checked:", managersChecked);
-  };
-
-  // Use watch to track the state of checkboxes
-  const mineChecked = watch("mine", false);
-  const managersChecked = watch("managers", false);
-
   return (
     <aside className="sidebar">
-      <form onSubmit={handleSubmit(onSubmit)} className="sidebar__form">
+      <Form onSubmit={handleSubmit} className="sidebar__form">
         {/* top checkbox filters */}
         <div className="checkbox-input">
-          <input
-            defaultValue="mine"
-            {...register("mine")}
-            type="checkbox"
-            name=""
-            id="mine"
-          />
+          <input type="checkbox" name="fa" id="mine" />
           <label htmlFor="mine">Я записан</label>
         </div>
         <div className="checkbox-input">
-          <input type="checkbox" name="" id="managers" />
+          <input type="checkbox" name="dt" id="managers" />
           <label htmlFor="managers">Для руководителей</label>
         </div>
 
@@ -71,7 +56,7 @@ const Sidebar = () => {
           <button type="submit">Показать</button>
           <button>Сбросить фильтры</button>
         </div>
-      </form>
+      </Form>
     </aside>
   );
 };
