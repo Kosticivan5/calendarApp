@@ -3,17 +3,21 @@ import TypesDropdown from "./TypesDropdown";
 
 import { Form } from "react-router-dom";
 
-const handleSubmit = (e) => {
-  e.preventDefault();
-};
+// const handleSubmit = (e) => {
+//   e.preventDefault();
+// };
 
 const Sidebar = () => {
   return (
     <aside className="sidebar">
-      <Form onSubmit={handleSubmit} className="sidebar__form">
+      <Form
+        // onSubmit={handleSubmit}
+        action="/calendarDKO"
+        className="sidebar__form"
+      >
         {/* top checkbox filters */}
         <div className="checkbox-input">
-          <input type="checkbox" name="fa" id="mine" />
+          <input type="checkbox" name="fa" id="mine" value={"hello"} />
           <label htmlFor="mine">Я записан</label>
         </div>
         <div className="checkbox-input">

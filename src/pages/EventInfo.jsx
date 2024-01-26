@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams, useLocation } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { GrClose } from "react-icons/gr";
 import { CiCalendar } from "react-icons/ci";
 import { CiClock2 } from "react-icons/ci";

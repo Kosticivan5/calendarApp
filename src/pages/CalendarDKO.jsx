@@ -12,6 +12,7 @@ const CalendarDKO = () => {
         <SearchForm />
         <div className="calendar__wrapper">
           <Sidebar />
+
           <div className="weekdays">
             <CalendarHeader />
             <DaysOfWeek />

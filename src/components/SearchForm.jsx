@@ -26,7 +26,7 @@ const SearchForm = () => {
   }, []);
 
   return (
-    <form className="search-form">
+    <Form className="search-form">
       <div className="search-input-container">
         <CiSearch className="search-icon" />
         <input
@@ -51,7 +51,7 @@ const SearchForm = () => {
       <button className="search-form__btn" type="submit">
         Найти
       </button>
-    </form>
+    </Form>
   );
 };
 export default SearchForm;

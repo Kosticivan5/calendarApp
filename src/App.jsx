@@ -54,10 +54,7 @@ function App() {
         {
           path: "calendarDKO",
           element: <CalendarDKO />,
-          children: [
-            { index: true, element: <Sidebar /> },
-            { path: "event-info/:id", element: <EventInfo /> },
-          ],
+          children: [{ path: "event-info/:id", element: <EventInfo /> }],
         },
         {
           path: "CalendarCORP",
