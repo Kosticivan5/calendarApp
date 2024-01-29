@@ -12,8 +12,6 @@ const WeeklyEvents = ({ row }) => {
   const { filteredEvents } = useSelector((store) => store.searchBarFilter);
   const dispatch = useDispatch();
 
-  console.log(calendarEvents);
-
   return (
     <>
       <div className="currentWeekDay">

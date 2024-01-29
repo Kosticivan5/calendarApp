@@ -1,7 +1,7 @@
 import FormatDropdown from "./FormatDropdown";
 import TypesDropdown from "./TypesDropdown";
 
-import { Form, useNavigate } from "react-router-dom";
+import { Form, useNavigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   toggleCheckbox,
@@ -20,6 +20,8 @@ import { filterEvents } from "../features/calendar/calendarSlice";
 const Sidebar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+
   const {
     registred,
     for_type,
@@ -39,51 +41,44 @@ const Sidebar = () => {
   const { calendarEvents } = useSelector((store) => store.calendar);
 
   useEffect(() => {
+    const urlSearchParams = new URLSearchParams(location.search);
+    const queryParams = Object.fromEntries(urlSearchParams.entries());
+
     if (submitted) {
       const conditions = {
-        ...(registred === 1 && { registred: 1 }),
-        ...(for_type === 1 && { for_type: "boss" }),
-        ...(starting === 1 && { starting: 1 }),
-        ...(lead_academy === 1 && { lead_academy: 1 }),
-        ...(lead_friday === 1 && { lead_friday: 1 }),
-        ...(learn_own === 1 && { learn_own: 1 }),
-        ...(digital_lit === 1 && { digital_lit: 1 }),
-        ...(finance_lit === 1 && { finance_lit: 1 }),
-        ...(searchValue.trim() !== "" && { searchValue }),
-        ...(formatValue.trim() !== "" && { formatValue }),
-        ...(typeValue.trim() !== "" && { typeValue }),
+        ...(registred === 1 ? { registred: 1 } : undefined),
+        ...(for_type === 1 ? { for_type: "boss" } : undefined),
+        ...(starting === 1 ? { starting: 1 } : undefined),
+        ...(lead_academy === 1 ? { lead_academy: 1 } : undefined),
+        ...(lead_friday === 1 ? { lead_friday: 1 } : undefined),
+        ...(learn_own === 1 ? { learn_own: 1 } : undefined),
+        ...(digital_lit === 1 ? { digital_lit: 1 } : undefined),
+        ...(finance_lit === 1 ? { finance_lit: 1 } : undefined),
+        ...(searchValue !== "" ? { searchValue } : undefined),
+        ...(formatValue !== "" ? { type: formatValue } : undefined),
+        ...(typeValue !== "" ? { type: typeValue } : undefined),
       };
 
-      if (Object.keys(conditions).length === 0) {
-        // The object is empty, stop here and return
-        dispatch(filterEvents(calendarEvents));
-        return;
-      }
+      console.log(conditions);
 
-      let shouldHide = (item, key) => item[key] !== conditions[key];
-      const newFilteredEvents = filteredEvents.map((evt) => {
-        const newProperty = "isHidden";
+      const queryString = new URLSearchParams(conditions).toString();
 
-        const anyValueUndefined = Object.values(evt).some(
+      navigate({ search: queryString });
+
+      const newFilteredEvents = calendarEvents.map((evt) => {
+        const anyValueUndefined = Object.values(conditions).some(
           (value) => value === undefined
         );
 
         if (anyValueUndefined) {
-          // If any value in the object is undefined, return the original object
-          return evt;
+          return { ...evt, isHidden: false };
         }
 
-        for (const key in conditions) {
-          const addItem = shouldHide(evt, key);
-          return { ...evt, [newProperty]: addItem };
-        }
-      });
-      console.log(newFilteredEvents);
+        const allConditionsMet = Object.keys(conditions).every(
+          (key) => evt[key] === conditions[key]
+        );
 
-      const queryString = new URLSearchParams(conditions).toString();
-      console.log(queryString);
-      navigate({
-        search: queryString,
+        return { ...evt, isHidden: !allConditionsMet };
       });
 
       dispatch(filterEvents(newFilteredEvents));
