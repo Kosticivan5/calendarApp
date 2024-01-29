@@ -42,6 +42,9 @@ const calendarSlice = createSlice({
     handleCurrentMonth: (state, action) => {
       state.currentMonth = getMonth(state.monthIndex);
     },
+    filterEvents: (state, action) => {
+      state.calendarEvents = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -58,7 +61,12 @@ const calendarSlice = createSlice({
   },
 });
 
-export const { nextMonth, prevMonth, handleCurrentMonth, handleEvents } =
-  calendarSlice.actions;
+export const {
+  nextMonth,
+  prevMonth,
+  handleCurrentMonth,
+  handleEvents,
+  filterEvents,
+} = calendarSlice.actions;
 
 export default calendarSlice.reducer;

@@ -2,7 +2,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowUp } from "react-icons/io";
 import {
   toggleDropdown,
-  selectFormat,
+  selectType,
 } from "../features/typesDropdown/typesDropdownSlice";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -20,7 +20,7 @@ const TypesDropdown = () => {
         {isOpen ? <IoIosArrowDown /> : <IoIosArrowUp />}
       </button>
       {isOpen && (
-        <ul onClick={(e) => dispatch(selectFormat(e.target.textContent))}>
+        <ul onClick={(e) => dispatch(selectType(e.target.textContent))}>
           <li>Персональная эффективность</li>
           <li>Лидерские навыки</li>
           <li>Digital & IT</li>

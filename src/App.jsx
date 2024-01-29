@@ -19,6 +19,7 @@ import CalendarDRPZ from "./pages/CalendarDRPZ";
 import SharedLayout from "./pages/SharedLayout";
 import EventInfo from "./pages/EventInfo";
 import Sidebar from "./components/Sidebar";
+import { handleSearchBarEvents } from "./features/Searchbar/searchbarSlice";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,9 +35,9 @@ function App() {
     dispatch(handleCurrentMonth());
   }, [monthIndex]);
 
-  // useEffect(() => {
-  //   dispatch(handleSearchBarEvents(calendarEvents));
-  // }, [calendarEvents]);
+  useEffect(() => {
+    dispatch(handleSearchBarEvents(calendarEvents));
+  }, [calendarEvents]);
 
   if (isLoading) {
     return (

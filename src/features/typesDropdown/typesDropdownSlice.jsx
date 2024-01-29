@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   info: "Направление",
   isOpen: false,
-  value: "",
+  typeValue: "",
 };
 
 const typesDropdownSlice = createSlice({
@@ -13,7 +13,7 @@ const typesDropdownSlice = createSlice({
     toggleDropdown: (state, action) => {
       state.isOpen = !state.isOpen;
     },
-    selectFormat: (state, action) => {
+    selectType: (state, action) => {
       state.info = action.payload;
       state.isOpen = !state.isOpen;
       const dropDownTypes = new Map(
@@ -28,12 +28,12 @@ const typesDropdownSlice = createSlice({
       );
       if (dropDownTypes.has(action.payload)) {
         const type = dropDownTypes.get(action.payload);
-        state.value = type;
+        state.typeValue = type;
       }
     },
   },
 });
 
-export const { toggleDropdown, selectFormat } = typesDropdownSlice.actions;
+export const { toggleDropdown, selectType } = typesDropdownSlice.actions;
 
 export default typesDropdownSlice.reducer;

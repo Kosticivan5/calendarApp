@@ -1,27 +1,136 @@
 import FormatDropdown from "./FormatDropdown";
 import TypesDropdown from "./TypesDropdown";
 
-import { Form } from "react-router-dom";
-
-// const handleSubmit = (e) => {
-//   e.preventDefault();
-// };
+import { Form, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  toggleCheckbox,
+  selectCheckboxes,
+} from "../features/checkboxes/checkboxesSlice";
+import {
+  handleSearchBarChange,
+  handleSearchBarEvents,
+} from "../features/Searchbar/searchbarSlice";
+import { selectFormat } from "../features/formatDropdown/formatDropdownSlice";
+import { selectType } from "../features/typesDropdown/typesDropdownSlice";
+import { useEffect, useMemo, useState } from "react";
+import { isSubmitted } from "../features/sidebar/sidebarSlice";
+import { filterEvents } from "../features/calendar/calendarSlice";
 
 const Sidebar = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const {
+    registred,
+    for_type,
+    starting,
+    lead_academy,
+    lead_friday,
+    learn_own,
+    digital_lit,
+    finance_lit,
+  } = useSelector((store) => store.checkboxes);
+  const { searchValue } = useSelector((store) => store.searchBarFilter);
+  const { formatValue } = useSelector((store) => store.formatDropdown);
+  const { typeValue } = useSelector((store) => store.typesDropdown);
+
+  const { submitted } = useSelector((store) => store.sidebar);
+  const { filteredEvents } = useSelector((store) => store.searchBarFilter);
+  const { calendarEvents } = useSelector((store) => store.calendar);
+
+  useEffect(() => {
+    if (submitted) {
+      const conditions = {
+        ...(registred === 1 && { registred: 1 }),
+        ...(for_type === 1 && { for_type: "boss" }),
+        ...(starting === 1 && { starting: 1 }),
+        ...(lead_academy === 1 && { lead_academy: 1 }),
+        ...(lead_friday === 1 && { lead_friday: 1 }),
+        ...(learn_own === 1 && { learn_own: 1 }),
+        ...(digital_lit === 1 && { digital_lit: 1 }),
+        ...(finance_lit === 1 && { finance_lit: 1 }),
+        ...(searchValue.trim() !== "" && { searchValue }),
+        ...(formatValue.trim() !== "" && { formatValue }),
+        ...(typeValue.trim() !== "" && { typeValue }),
+      };
+
+      if (Object.keys(conditions).length === 0) {
+        // The object is empty, stop here and return
+        dispatch(filterEvents(calendarEvents));
+        return;
+      }
+
+      let shouldHide = (item, key) => item[key] !== conditions[key];
+      const newFilteredEvents = filteredEvents.map((evt) => {
+        const newProperty = "isHidden";
+
+        const anyValueUndefined = Object.values(evt).some(
+          (value) => value === undefined
+        );
+
+        if (anyValueUndefined) {
+          // If any value in the object is undefined, return the original object
+          return evt;
+        }
+
+        for (const key in conditions) {
+          const addItem = shouldHide(evt, key);
+          return { ...evt, [newProperty]: addItem };
+        }
+      });
+      console.log(newFilteredEvents);
+
+      const queryString = new URLSearchParams(conditions).toString();
+      console.log(queryString);
+      navigate({
+        search: queryString,
+      });
+
+      dispatch(filterEvents(newFilteredEvents));
+      dispatch(isSubmitted(false));
+    }
+  }, [
+    registred,
+    for_type,
+    starting,
+    lead_academy,
+    lead_friday,
+    learn_own,
+    digital_lit,
+    finance_lit,
+    navigate,
+    submitted,
+  ]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(isSubmitted(true));
+  };
+
   return (
     <aside className="sidebar">
-      <Form
-        // onSubmit={handleSubmit}
+      <form
+        onSubmit={handleSubmit}
         action="/calendarDKO"
         className="sidebar__form"
       >
         {/* top checkbox filters */}
         <div className="checkbox-input">
-          <input type="checkbox" name="fa" id="mine" value={"hello"} />
+          <input
+            type="checkbox"
+            name="registred"
+            id="mine"
+            onChange={(e) => dispatch(toggleCheckbox(e.target.name))}
+          />
           <label htmlFor="mine">Я записан</label>
         </div>
         <div className="checkbox-input">
-          <input type="checkbox" name="dt" id="managers" />
+          <input
+            type="checkbox"
+            name="for_type"
+            id="managers"
+            onChange={(e) => dispatch(toggleCheckbox(e.target.name))}
+          />
           <label htmlFor="managers">Для руководителей</label>
         </div>
 
@@ -32,35 +141,65 @@ const Sidebar = () => {
         </div>
         {/* bottom checkbox filters */}
         <div className="checkbox-input">
-          <input type="checkbox" name="" id="starting" />
+          <input
+            type="checkbox"
+            name="starting"
+            id="starting"
+            onChange={(e) => dispatch(toggleCheckbox(e.target.name))}
+          />
           <label htmlFor="starting">Starting</label>
         </div>
         <div className="checkbox-input">
-          <input type="checkbox" name="" id="academy" />
-          <label htmlFor="academy">Академия лидеров</label>
+          <input
+            type="checkbox"
+            name="lead_academy"
+            id="lead_academy"
+            onChange={(e) => dispatch(toggleCheckbox(e.target.name))}
+          />
+          <label htmlFor="lead_academy">Академия лидеров</label>
         </div>
         <div className="checkbox-input">
-          <input type="checkbox" name="" id="liders" />
-          <label htmlFor="liders">Лидерские пятница</label>
+          <input
+            type="checkbox"
+            name="lead_friday"
+            id="lead_friday"
+            onChange={(e) => dispatch(toggleCheckbox(e.target.name))}
+          />
+          <label htmlFor="lead_friday">Лидерские пятница</label>
         </div>
         <div className="checkbox-input">
-          <input type="checkbox" name="" id="learn-own" />
-          <label htmlFor="learn-own">Учись у своих</label>
+          <input
+            type="checkbox"
+            name="learn_own"
+            id="learn_own"
+            onChange={(e) => dispatch(toggleCheckbox(e.target.name))}
+          />
+          <label htmlFor="learn_own">Учись у своих</label>
         </div>
         <div className="checkbox-input">
-          <input type="checkbox" name="" id="tech" />
-          <label htmlFor="tech">Цифровая грамотность</label>
+          <input
+            type="checkbox"
+            name="digital_lit"
+            id="digital_lit"
+            onChange={(e) => dispatch(toggleCheckbox(e.target.name))}
+          />
+          <label htmlFor="digital_lit">Цифровая грамотность</label>
         </div>
         <div className="checkbox-input">
-          <input type="checkbox" name="" id="finance" />
-          <label htmlFor="finance">Финансовая грамостность</label>
+          <input
+            type="checkbox"
+            name="finance_lit"
+            id="finance_lit"
+            onChange={(e) => dispatch(toggleCheckbox(e.target.name))}
+          />
+          <label htmlFor="finance_lit">Финансовая грамостность</label>
         </div>
         {/* control buttons */}
         <div className="button-container">
           <button type="submit">Показать</button>
           <button>Сбросить фильтры</button>
         </div>
-      </Form>
+      </form>
     </aside>
   );
 };

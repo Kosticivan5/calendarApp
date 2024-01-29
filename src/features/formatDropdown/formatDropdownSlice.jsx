@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   info: "Формат",
   isOpen: false,
-  value: "",
+  formatValue: "",
 };
 
 const FormatDropdownSlice = createSlice({
@@ -18,7 +18,7 @@ const FormatDropdownSlice = createSlice({
       state.isOpen = !state.isOpen;
       const stateValue = (value) =>
         value === "Дистанционно" ? "webinar" : "training";
-      state.value = stateValue(action.payload);
+      state.formatValue = stateValue(action.payload);
     },
   },
 });

@@ -14,6 +14,7 @@ const Event = ({
   id,
   path_id,
   registred,
+  isHidden,
 }) => {
   const eventStart = dayjs(start_date).day();
   let eventEnd = dayjs(finish_date).diff(dayjs(start_date), "day");
@@ -26,8 +27,11 @@ const Event = ({
     }
   };
 
+  // console.log(isHidden);
+
   return (
     <Link
+      style={isHidden ? { color: "red" } : {}}
       to={`event-info/${path_id ? path_id : id}`}
       className={
         dayjs(finish_date).isBefore(dayjs())

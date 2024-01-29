@@ -4,8 +4,6 @@ import dayjs from "dayjs";
 import { nanoid } from "nanoid";
 // import { useGlobalContext } from "../context/GlobalContext";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useMemo } from "react";
-import { handleEvents } from "../features/calendar/calendarSlice";
 
 const WeeklyEvents = ({ row }) => {
   const mapEvents = new Map();
@@ -13,6 +11,8 @@ const WeeklyEvents = ({ row }) => {
   const { calendarEvents } = useSelector((store) => store.calendar);
   const { filteredEvents } = useSelector((store) => store.searchBarFilter);
   const dispatch = useDispatch();
+
+  console.log(calendarEvents);
 
   return (
     <>
@@ -34,20 +34,9 @@ const WeeklyEvents = ({ row }) => {
             is_first,
             is_last,
             is_Middle,
+            isHidden,
           } = data;
 
-          // const splitHub = () => {
-          //   if (data.hub) {
-          //     const splited = data.hub.split(";");
-
-          //     const cities = splited.map((item) => {
-          //       return item.split("][")[1];
-          //     });
-          //     console.log(cities);
-          //   }
-          // };
-
-          // splitHub();
           for (const day of mapEvents.values()) {
             if (
               dayjs(day).week() === dayjs(start_date).week() &&
@@ -65,6 +54,7 @@ const WeeklyEvents = ({ row }) => {
                   is_first={is_first}
                   is_last={is_last}
                   is_Middle={is_Middle}
+                  isHidden={isHidden}
                   {...data}
                 />
               );
