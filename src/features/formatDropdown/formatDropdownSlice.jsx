@@ -20,9 +20,11 @@ const FormatDropdownSlice = createSlice({
         value === "Дистанционно" ? "webinar" : "training";
       state.formatValue = stateValue(action.payload);
     },
+    resetFormat: (state) => initialState,
   },
 });
 
-export const { toggleDropdown, selectFormat } = FormatDropdownSlice.actions;
+export const { toggleDropdown, selectFormat, resetFormat } =
+  FormatDropdownSlice.actions;
 
 export default FormatDropdownSlice.reducer;

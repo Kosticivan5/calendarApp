@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   submitted: false,
   isHidden: false,
+  buttonDisabled: false,
 };
 
 const sidebarSlice = createSlice({
@@ -15,8 +16,12 @@ const sidebarSlice = createSlice({
     hideEvents: (state, action) => {
       state.isHidden = action.payload;
     },
+    toggleDisabledButton: (state, action) => {
+      state.buttonDisabled = action.payload;
+    },
   },
 });
 
-export const { isSubmitted, hideEvents } = sidebarSlice.actions;
+export const { isSubmitted, hideEvents, toggleDisabledButton } =
+  sidebarSlice.actions;
 export default sidebarSlice.reducer;

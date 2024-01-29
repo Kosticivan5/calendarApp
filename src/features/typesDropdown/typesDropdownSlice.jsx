@@ -31,9 +31,11 @@ const typesDropdownSlice = createSlice({
         state.typeValue = type;
       }
     },
+    resetType: (state) => initialState,
   },
 });
 
-export const { toggleDropdown, selectType } = typesDropdownSlice.actions;
+export const { toggleDropdown, selectType, resetType } =
+  typesDropdownSlice.actions;
 
 export default typesDropdownSlice.reducer;

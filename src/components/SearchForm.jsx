@@ -1,18 +1,68 @@
 import { CiSearch } from "react-icons/ci";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   handleSearchBarChange,
   resetSearchBarValue,
 } from "../features/Searchbar/searchbarSlice";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { GrClose } from "react-icons/gr";
+import useHandleFilteredEvents from "./HandleFilteredEvents";
+import { useNavigate } from "react-router-dom";
+import { isSubmitted } from "../features/sidebar/sidebarSlice";
 
 import { Form, useLoaderData, Link } from "react-router-dom";
 
 const SearchForm = () => {
   const [value, setValue] = useState("");
-
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const {
+    registred,
+    for_type,
+    starting,
+    lead_academy,
+    lead_friday,
+    learn_own,
+    digital_lit,
+    finance_lit,
+  } = useSelector((store) => store.checkboxes);
+
+  const { submitted, buttonDisabled } = useSelector((store) => store.sidebar);
+
+  let conditions = {};
+
+  const filteredLogic = useHandleFilteredEvents(
+    navigate,
+    conditions,
+    submitted,
+    buttonDisabled,
+    dispatch,
+    isSubmitted,
+    registred,
+    for_type,
+    starting,
+    lead_academy,
+    lead_friday,
+    learn_own,
+    digital_lit,
+    finance_lit
+  );
+
+  useEffect(() => {
+    filteredLogic();
+  }, [
+    registred,
+    for_type,
+    starting,
+    lead_academy,
+    lead_friday,
+    learn_own,
+    digital_lit,
+    finance_lit,
+    navigate,
+    submitted,
+  ]);
 
   const handleChange = useMemo(() => {
     let timeoutId;
@@ -21,12 +71,13 @@ const SearchForm = () => {
       setValue(e.target.value);
       timeoutId = setTimeout(() => {
         dispatch(handleSearchBarChange(e.target.value));
-      }, 1000);
+      }, 100);
     };
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(isSubmitted(true));
   };
 
   return (
@@ -42,11 +93,12 @@ const SearchForm = () => {
           placeholder="Поиск внутри календаря"
         />
         <button
+          type="button"
           onClick={() => {
-            dispatch(resetSearchBarValue(""));
             setValue("");
+            dispatch(resetSearchBarValue(""));
+            dispatch(isSubmitted(true));
           }}
-          type="submit"
           className="search-reset-icon"
         >
           {value.trim() !== "" && <GrClose />}
