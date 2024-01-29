@@ -25,8 +25,12 @@ const SearchForm = () => {
     };
   }, []);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
   return (
-    <form className="search-form">
+    <form onSubmit={handleSubmit} className="search-form">
       <div className="search-input-container">
         <CiSearch className="search-icon" />
         <input
@@ -42,7 +46,7 @@ const SearchForm = () => {
             dispatch(resetSearchBarValue(""));
             setValue("");
           }}
-          type="button"
+          type="submit"
           className="search-reset-icon"
         >
           {value.trim() !== "" && <GrClose />}

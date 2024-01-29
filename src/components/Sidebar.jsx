@@ -54,12 +54,10 @@ const Sidebar = () => {
         ...(learn_own === 1 ? { learn_own: 1 } : undefined),
         ...(digital_lit === 1 ? { digital_lit: 1 } : undefined),
         ...(finance_lit === 1 ? { finance_lit: 1 } : undefined),
-        ...(searchValue !== "" ? { searchValue } : undefined),
+        ...(searchValue !== "" ? { name: searchValue } : undefined),
         ...(formatValue !== "" ? { type: formatValue } : undefined),
         ...(typeValue !== "" ? { type: typeValue } : undefined),
       };
-
-      console.log(conditions);
 
       const queryString = new URLSearchParams(conditions).toString();
 
@@ -74,8 +72,18 @@ const Sidebar = () => {
           return { ...evt, isHidden: false };
         }
 
-        const allConditionsMet = Object.keys(conditions).every(
-          (key) => evt[key] === conditions[key]
+        const allConditionsMet = Object.entries(conditions).every(
+          ([key, value]) => {
+            console.log(key, value);
+            if (key === "name") {
+              return evt[key].toLowerCase().startsWith(value.toLowerCase());
+            }
+            if (key === "for_type") {
+              return evt[key].indexOf("boss]") !== -1;
+            }
+
+            return evt[key] === conditions[key];
+          }
         );
 
         return { ...evt, isHidden: !allConditionsMet };
@@ -192,7 +200,7 @@ const Sidebar = () => {
         {/* control buttons */}
         <div className="button-container">
           <button type="submit">Показать</button>
-          <button>Сбросить фильтры</button>
+          <button type="button">Сбросить фильтры</button>
         </div>
       </form>
     </aside>
