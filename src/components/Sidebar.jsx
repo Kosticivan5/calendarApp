@@ -1,7 +1,7 @@
 import FormatDropdown from "./FormatDropdown";
 import TypesDropdown from "./TypesDropdown";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   toggleCheckbox,
@@ -20,6 +20,7 @@ import { resetFormat } from "../features/formatDropdown/formatDropdownSlice";
 const Sidebar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const {
     registred,

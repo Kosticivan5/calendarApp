@@ -91,6 +91,7 @@ const SearchForm = () => {
           value={value}
           className="search-form__input"
           placeholder="Поиск внутри календаря"
+          autoComplete="off"
         />
         <button
           type="button"

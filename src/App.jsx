@@ -2,23 +2,15 @@ import { useEffect, useMemo } from "react";
 import {
   getCalendarEvents,
   handleCurrentMonth,
-  handleEvents,
 } from "./features/calendar/calendarSlice";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  HashRouter,
-  Routes,
-  Route,
-  createHashRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createHashRouter, RouterProvider } from "react-router-dom";
 import CalendarDKO from "./pages/CalendarDKO";
 import CalendarCORP from "./pages/CalendarCORP";
 import CalendarRETAIL from "./pages/CalendarRETAIL";
 import CalendarDRPZ from "./pages/CalendarDRPZ";
 import SharedLayout from "./pages/SharedLayout";
 import EventInfo from "./pages/EventInfo";
-import Sidebar from "./components/Sidebar";
 import { handleSearchBarEvents } from "./features/Searchbar/searchbarSlice";
 
 function App() {
@@ -77,23 +69,7 @@ function App() {
     },
   ]);
 
-  return (
-    <RouterProvider router={router} />
-
-    // <HashRouter>
-    //   <Routes>
-    //     <Route path="/" element={<SharedLayout />}>
-    //       <Route path="calendarDKO" element={<CalendarDKO />}>
-    //         <Route path="event-info/:id" element={<EventInfo />} />
-    //       </Route>
-    //       <Route path="calendarCORP" element={<CalendarCORP />} />
-    //       <Route path="CalendarRETAIL" element={<CalendarRETAIL />} />
-    //       <Route path="CalendarDRPZ" element={<CalendarDRPZ />} />
-    //     </Route>
-    //     <Route path="*" element={<div>404 Erorr</div>} />
-    //   </Routes>
-    // </HashRouter>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

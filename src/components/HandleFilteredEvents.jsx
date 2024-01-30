@@ -1,6 +1,8 @@
 import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { filterEvents } from "../features/calendar/calendarSlice";
+import { useState, useEffect } from "react";
+import store from "../store";
 
 const useHandleFilteredEvents = (
   navigate,
@@ -18,8 +20,6 @@ const useHandleFilteredEvents = (
   digital_lit,
   finance_lit
 ) => {
-  const location = useLocation();
-
   const { filteredEvents } = useSelector((store) => store.searchBarFilter);
   const { calendarEvents } = useSelector((store) => store.calendar);
 
@@ -28,8 +28,8 @@ const useHandleFilteredEvents = (
   const { typeValue } = useSelector((store) => store.typesDropdown);
 
   const filteredLogic = () => {
-    const urlSearchParams = new URLSearchParams(location.search);
-    const queryParams = Object.fromEntries(urlSearchParams.entries());
+    // const urlSearchParams = new URLSearchParams(location.search);
+    // const queryParams = Object.fromEntries(urlSearchParams.entries());
 
     if (submitted) {
       conditions = {
@@ -43,11 +43,10 @@ const useHandleFilteredEvents = (
         ...(finance_lit === 1 ? { finance_lit: 1 } : undefined),
         ...(searchValue.trim() !== "" ? { name: searchValue } : undefined),
         ...(formatValue !== "" ? { type: formatValue } : undefined),
-        ...(typeValue !== "" ? { type: typeValue } : undefined),
+        ...(typeValue !== "" ? { direction: typeValue } : undefined),
       };
 
       const queryString = new URLSearchParams(conditions).toString();
-      console.log(queryString);
 
       navigate({ search: queryString });
 
@@ -80,6 +79,7 @@ const useHandleFilteredEvents = (
       dispatch(isSubmitted(false));
     }
   };
+
   return filteredLogic;
 };
 export default useHandleFilteredEvents;

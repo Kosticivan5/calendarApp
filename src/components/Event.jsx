@@ -31,7 +31,7 @@ const Event = ({
 
   return (
     <Link
-      style={isHidden ? { color: "red" } : {}}
+      style={isHidden ? { opacity: 0.3 } : {}}
       to={`event-info/${path_id ? path_id : id}`}
       className={
         dayjs(finish_date).isBefore(dayjs())
