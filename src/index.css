@@ -669,8 +669,12 @@
 
 .close-sidebar-btn svg {
   font-size: 14px;
+  color: #000;
 }
 
+.close-sidebar-btn svg:hover {
+  color: #e40038;
+}
 .event-info-header {
   display: flex;
   align-items: center;

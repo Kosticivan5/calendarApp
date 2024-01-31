@@ -37,8 +37,11 @@ function App() {
     (store) => store.calendar
   );
 
-  useMemo(() => {
-    dispatch(getCalendarEvents());
+  useEffect(() => {
+    const dataAlreadyFetched = JSON.parse(localStorage.getItem("eventList"));
+    if (dataAlreadyFetched.length < 1) {
+      dispatch(getCalendarEvents());
+    }
   }, []);
 
   useEffect(() => {
@@ -49,6 +52,10 @@ function App() {
     updateFiltersFromUrl(dispatch, location);
     dispatch(isSubmitted(true));
   }, [location.search]);
+
+  useEffect(() => {
+    localStorage.setItem("eventList", JSON.stringify(calendarEvents));
+  }, [location.search, calendarEvents]);
 
   // useEffect(() => {
   //   dispatch(handleSearchBarEvents(calendarEvents));

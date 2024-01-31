@@ -59,9 +59,10 @@ export const updateFiltersFromUrl = (dispatch, location) => {
       dispatch(action(formatValue));
       return;
     }
-    // if (key === "name") {
-    //   dispatch(action(value));
-    // }
+    if (key === "name") {
+      dispatch(action(value));
+    }
+    if (key === "name") return;
     // checkboxes update
     dispatch(action(key));
   });

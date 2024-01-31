@@ -29,6 +29,7 @@ const SearchForm = () => {
   } = useSelector((store) => store.checkboxes);
 
   const { submitted, buttonDisabled } = useSelector((store) => store.sidebar);
+  const { searchValue } = useSelector((store) => store.searchBarFilter);
 
   let conditions = {};
 
@@ -64,16 +65,16 @@ const SearchForm = () => {
     submitted,
   ]);
 
-  const handleChange = useMemo(() => {
-    let timeoutId;
-    return (e) => {
-      clearTimeout(timeoutId);
-      setValue(e.target.value);
-      timeoutId = setTimeout(() => {
-        dispatch(handleSearchBarChange(e.target.value));
-      }, 100);
-    };
-  }, []);
+  // const handleChange = useMemo(() => {
+  //   let timeoutId;
+  //   return (e) => {
+  //     clearTimeout(timeoutId);
+  //     setValue(e.target.value);
+  //     timeoutId = setTimeout(() => {
+  //       dispatch(handleSearchBarChange(e.target.value));
+  //     }, 100);
+  //   };
+  // }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -85,10 +86,10 @@ const SearchForm = () => {
       <div className="search-input-container">
         <CiSearch className="search-icon" />
         <input
-          onChange={handleChange}
+          onChange={(e) => dispatch(handleSearchBarChange(e.target.value))}
           type="text"
           name="name"
-          value={value}
+          value={searchValue}
           className="search-form__input"
           placeholder="Поиск внутри календаря"
           autoComplete="off"
@@ -102,7 +103,7 @@ const SearchForm = () => {
           }}
           className="search-reset-icon"
         >
-          {value.trim() !== "" && <GrClose />}
+          {searchValue.trim() !== "" && <GrClose />}
         </button>
       </div>
       <button className="search-form__btn" type="submit">

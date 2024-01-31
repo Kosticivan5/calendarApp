@@ -1494,7 +1494,7 @@
 
       "starting": 0,
       "learn_own": 0,
-      "lead_academy": 0,
+      "lead_academy": 1,
       "lead_friday": 0,
       "digital_lit": 0,
       "finance_lit": 0,
@@ -4022,9 +4022,9 @@
 
       "type": "webinar",
 
-      "start_date": "2024-01-31T08:25:00+00:00",
+      "start_date": "2024-01-31T18:25:00+00:00",
 
-      "finish_date": "2024-02-06T09:00:00+00:00",
+      "finish_date": "2024-02-06T22:00:00+00:00",
 
       "organizational_form": "internal",
 
