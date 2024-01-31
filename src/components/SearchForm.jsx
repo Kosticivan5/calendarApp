@@ -7,7 +7,7 @@ import {
 import { useEffect, useMemo, useState } from "react";
 import { GrClose } from "react-icons/gr";
 import useHandleFilteredEvents from "./HandleFilteredEvents";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { isSubmitted } from "../features/sidebar/sidebarSlice";
 
 import { Form, useLoaderData, Link } from "react-router-dom";
@@ -87,7 +87,7 @@ const SearchForm = () => {
         <input
           onChange={handleChange}
           type="text"
-          name="search-field"
+          name="name"
           value={value}
           className="search-form__input"
           placeholder="Поиск внутри календаря"

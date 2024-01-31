@@ -7,7 +7,7 @@ const CalendarNavBar = () => {
         className={({ isActive }) =>
           isActive ? "nav-link active" : "nav-link"
         }
-        to="/calendarDKO"
+        to={`/calendarDKO`}
       >
         Вебинары и тренинги
       </NavLink>

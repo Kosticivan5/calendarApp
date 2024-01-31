@@ -15,16 +15,16 @@ const searchBarSlice = createSlice({
     resetSearchBarValue: (state, action) => {
       state.searchValue = action.payload;
     },
-    handleSearchBarEvents: (state, action) => {
-      state.filteredEvents = action.payload;
-    },
+    // handleSearchBarEvents: (state, action) => {
+    //   state.filteredEvents = action.payload;
+    // },
   },
 });
 
 export const {
   handleSearchBarChange,
   resetSearchBarValue,
-  handleSearchBarEvents,
+  // handleSearchBarEvents,
 } = searchBarSlice.actions;
 
 export default searchBarSlice.reducer;

@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLoaderData, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 
@@ -16,6 +16,7 @@ const Event = ({
   registred,
   isHidden,
 }) => {
+  const location = useLocation();
   const eventStart = dayjs(start_date).day();
   let eventEnd = dayjs(finish_date).diff(dayjs(start_date), "day");
   eventEnd += 1;
@@ -32,7 +33,7 @@ const Event = ({
   return (
     <Link
       style={isHidden ? { opacity: 0.3 } : {}}
-      to={`event-info/${path_id ? path_id : id}`}
+      to={`event-info/${path_id ? path_id : id}/${location.search}`}
       className={
         dayjs(finish_date).isBefore(dayjs())
           ? `${registeredEventClass()} event dim`

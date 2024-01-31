@@ -15,8 +15,10 @@ const checkboxSlice = createSlice({
   name: "checkboxes",
   initialState,
   reducers: {
+    initialRender: (state, action) => {
+      state[action.payload] = 1;
+    },
     toggleCheckbox: (state, action) => {
-      const { checkboxName } = action.payload;
       state[action.payload] = state[action.payload] === 1 ? 0 : 1;
     },
     resetCheckboxes: (state) => {
@@ -25,6 +27,7 @@ const checkboxSlice = createSlice({
   },
 });
 
-export const { toggleCheckbox, resetCheckboxes } = checkboxSlice.actions;
+export const { toggleCheckbox, resetCheckboxes, initialRender } =
+  checkboxSlice.actions;
 export const selectCheckboxes = (state) => state.checkboxes;
 export default checkboxSlice.reducer;

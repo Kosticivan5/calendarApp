@@ -10,6 +10,12 @@ const FormatDropdownSlice = createSlice({
   name: "formatDropdown",
   initialState,
   reducers: {
+    initialFormatRender: (state, action) => {
+      state.info = action.payload;
+      const stateValue = (value) =>
+        value === "Дистанционно" ? "webinar" : "training";
+      state.formatValue = stateValue(action.payload);
+    },
     toggleDropdown: (state, action) => {
       state.isOpen = !state.isOpen;
     },
@@ -24,7 +30,11 @@ const FormatDropdownSlice = createSlice({
   },
 });
 
-export const { toggleDropdown, selectFormat, resetFormat } =
-  FormatDropdownSlice.actions;
+export const {
+  toggleDropdown,
+  selectFormat,
+  resetFormat,
+  initialFormatRender,
+} = FormatDropdownSlice.actions;
 
 export default FormatDropdownSlice.reducer;

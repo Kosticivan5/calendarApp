@@ -16,6 +16,7 @@ import {
 import useHandleFilteredEvents from "./HandleFilteredEvents";
 import { resetType } from "../features/typesDropdown/typesDropdownSlice";
 import { resetFormat } from "../features/formatDropdown/formatDropdownSlice";
+import { updateFiltersFromUrl } from "../filtersUtils";
 
 const Sidebar = () => {
   const dispatch = useDispatch();

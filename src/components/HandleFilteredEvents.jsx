@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { filterEvents } from "../features/calendar/calendarSlice";
 import { useState, useEffect } from "react";
-import store from "../store";
+import { store } from "../store";
 
 const useHandleFilteredEvents = (
   navigate,
@@ -45,7 +45,7 @@ const useHandleFilteredEvents = (
         ...(formatValue !== "" ? { type: formatValue } : undefined),
         ...(typeValue !== "" ? { direction: typeValue } : undefined),
       };
-
+      console.log(conditions);
       const queryString = new URLSearchParams(conditions).toString();
 
       navigate({ search: queryString });

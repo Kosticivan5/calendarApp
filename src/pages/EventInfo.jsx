@@ -7,8 +7,10 @@ import { CiShare2 } from "react-icons/ci";
 import { PiMonitorPlayLight } from "react-icons/pi";
 import dayjs from "dayjs";
 import formatDurationInRussian from "../getTimeConverted";
+import { useLocation } from "react-router-dom";
 
 const EventInfo = () => {
+  const location = useLocation();
   const { calendarEvents } = useSelector((store) => store.calendar);
 
   const { id: eventId } = useParams();
@@ -21,12 +23,15 @@ const EventInfo = () => {
 
   return (
     <>
-      <Link to={"/calendarDKO"}>
+      <Link to={`/calendarDKO/${location.search}`}>
         <div className="overlay"></div>
       </Link>
       <aside className="event-info">
         {/* close btn */}
-        <Link className="close-sidebar-btn" to={"/calendarDKO"}>
+        <Link
+          className="close-sidebar-btn"
+          to={`/calendarDKO/${location.search}`}
+        >
           <GrClose />
         </Link>
         {/* info */}
