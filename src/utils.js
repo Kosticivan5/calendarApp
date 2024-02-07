@@ -1,13 +1,24 @@
 import dayjs from "dayjs";
 import { getWeeksBetweenDates } from "./CalculateMultiWeek";
-import { nanoid } from "nanoid";
+import { endOfMonthNonWeekendDays } from "./countNonWeekendEndOfMonths";
 
 // global locale 'ru'
 import "dayjs/locale/ru";
 import * as localizedFormat from "dayjs/plugin/localizedFormat";
 import * as duration from "dayjs/plugin/duration";
 import * as relativeTime from "dayjs/plugin/relativeTime";
-import * as updateLocale from "dayjs/plugin/updateLocale";
+import * as isBetween from "dayjs/plugin/isBetween";
+import * as weekOfYear from "dayjs/plugin/weekOfYear";
+
+import * as timezone from "dayjs/plugin/timezone";
+import * as utc from "dayjs/plugin/utc";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs().utcOffset(180);
+
+// dayjs.tz.setDefault("Europe/Moscow");
+
 dayjs.extend(localizedFormat);
 dayjs.locale("ru");
 // ---
@@ -16,8 +27,8 @@ dayjs.duration();
 // ---
 dayjs.extend(relativeTime);
 // ---
+dayjs.extend(isBetween);
 
-import * as weekOfYear from "dayjs/plugin/weekOfYear";
 dayjs.extend(weekOfYear);
 
 // ===================--=================
@@ -92,9 +103,14 @@ export const getNewData = (data) => {
       in_wlist,
     } = info;
 
-    getWeeksBetweenDates(dayjs(start_date), dayjs(finish_date));
+    // getWeeksBetweenDates(dayjs(start_date), dayjs(finish_date));
 
-    if (dayjs(start_date).week() !== dayjs(finish_date).week()) {
+    // if the weeks of two dates don't have same week or same moth, we process them
+    if (
+      dayjs(start_date).week() !== dayjs(finish_date).week() ||
+      dayjs(start_date).month() !== dayjs(finish_date).month()
+    ) {
+      // variables for new properties
       let newStartDate;
       let spanTransfer;
       let newDay;
@@ -103,43 +119,106 @@ export const getNewData = (data) => {
       let isMiddle;
       let newFinishDate;
       let idCounter = 0;
-      for (
-        let i = 0;
-        i <= getWeeksBetweenDates(dayjs(start_date), dayjs(finish_date));
-        i++
-      ) {
+      let multiMonthStartDay;
+      let amountOfWeeks = getWeeksBetweenDates(
+        dayjs(start_date),
+        dayjs(finish_date)
+      );
+      // calculate how many end of month dates are not on fri,sut,sun
+      // and add i to the amount of weeks count
+
+      // if the start and finish dates are ona  different month
+      // we add one more loop to split the events
+      const endOfMonthOrigin = dayjs(start_date).endOf("month");
+      const endOfMonthOriginIncluded = dayjs(endOfMonthOrigin).isBetween(
+        start_date,
+        finish_date
+      );
+      if (endOfMonthOriginIncluded) {
+        amountOfWeeks =
+          amountOfWeeks + endOfMonthNonWeekendDays(start_date, finish_date);
+      }
+      console.log(endOfMonthOriginIncluded, "amount of weeks", amountOfWeeks);
+      // loop that determines to how many peaces we split the event
+      for (let i = 0; i <= amountOfWeeks; i++) {
+        // if it's the first slice, it gets property of 1
+        console.log(i);
+
+        isMiddle = 1;
+
         if (i === 0) {
           newStartDate = start_date;
           isFirst = 1;
+          // isLast = 0;
+          isMiddle = 0;
         } else {
           isFirst = 0;
         }
-        if (
-          i === getWeeksBetweenDates(dayjs(start_date), dayjs(finish_date) - 1)
-        ) {
+        // if it's the last slice, it gets property of 1 as last
+        if (i === amountOfWeeks) {
           isLast = 1;
-        }
-
-        if (
-          i > 0 &&
-          i < getWeeksBetweenDates(dayjs(start_date), dayjs(finish_date) - 1)
-        ) {
-          isMiddle = 1;
-        } else {
+          // isFirst = 0;
           isMiddle = 0;
+        } else {
+          isLast = 0;
         }
-
+        // the rest of them are middle slices
+        // if (
+        //   i > 0 &&
+        //   i < getWeeksBetweenDates(dayjs(start_date), dayjs(finish_date) - 1)
+        // ) {
+        //   isMiddle = 1;
+        // } else {
+        //   isMiddle = 0;
+        // }
+        if (multiMonthStartDay) {
+          newStartDate = multiMonthStartDay;
+        }
+        multiMonthStartDay = null;
+        // tje start of the event
         let eventStart = dayjs(newStartDate).day();
 
+        // how many lines is event allowed to span
+        // since there are 5 days, we can span across 6 lines
+
         const allowedToSpan = 6 - eventStart;
-
+        // variable that determines how much can current event slice span
         let addDays = allowedToSpan;
-
+        // if the difference between the original finished date and the new slice
+        // start date is smaller than the allowed to span amount, then we just
+        // reassign the value of the span as addDays as a difference between the
+        // new start date and the original finish date
         if (dayjs(finish_date).diff(newStartDate, "day") < allowedToSpan) {
           addDays = dayjs(finish_date).diff(newStartDate, "day");
         }
+        // new finish date is equals to new start date, plus the allowed to span amount
+        // as a addDays variable
+
+        // ==
+        const endOfMonth = dayjs(newStartDate).endOf("month");
+        const endOfMonthIncluded = dayjs(endOfMonth).isBetween(
+          newStartDate,
+          finish_date
+        );
+
+        if (
+          endOfMonthIncluded &&
+          dayjs(newStartDate).week() === dayjs(endOfMonth).week()
+        ) {
+          // console.log("hello");
+          addDays = dayjs(endOfMonth).diff(newStartDate, "day");
+          multiMonthStartDay = dayjs(endOfMonth).add(1, "day").format();
+          if (dayjs(multiMonthStartDay).get("day") === 6) {
+            multiMonthStartDay = dayjs(multiMonthStartDay).add(2, "day");
+          }
+          if (dayjs(multiMonthStartDay).get("day") === 0) {
+            multiMonthStartDay = dayjs(multiMonthStartDay).add(1, "day");
+          }
+        }
+        // ==
 
         newFinishDate = dayjs(newStartDate).add(addDays, "day").format();
+        // ========
         // newFinishDate = dayjs(newFinishDate).format();
 
         // if (dayjs(newStartDate).month() !== dayjs(newFinishDate).month()) {
@@ -148,6 +227,8 @@ export const getNewData = (data) => {
         //   isLast = 0;
         //   newFinishDate = dayjs(newStartDate).add(addDays, "day").format();
         // }
+        // =================
+
         let eventSpanEnd = dayjs(finish_date).diff(dayjs(newStartDate), "day");
 
         if (eventSpanEnd < 1) {

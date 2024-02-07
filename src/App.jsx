@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect } from "react";
 import {
   getCalendarEvents,
   handleCurrentMonth,
@@ -23,6 +23,7 @@ import EventInfo from "./pages/EventInfo";
 import { createHashHistory } from "history";
 import { updateFiltersFromUrl } from "./filtersUtils";
 import { isSubmitted } from "./features/sidebar/sidebarSlice";
+import ErrorPage from "./components/ErrorPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -39,7 +40,7 @@ function App() {
 
   useEffect(() => {
     const dataAlreadyFetched = JSON.parse(localStorage.getItem("eventList"));
-    if (dataAlreadyFetched.length < 1) {
+    if (!dataAlreadyFetched || dataAlreadyFetched.length < 1) {
       dispatch(getCalendarEvents());
     }
   }, []);
@@ -73,6 +74,7 @@ function App() {
     {
       path: "/",
       element: <SharedLayout />,
+      errorElement: <ErrorPage />,
       children: [
         {
           path: `calendarDKO`,
@@ -92,10 +94,6 @@ function App() {
           element: <CalendarDRPZ />,
         },
       ],
-    },
-    {
-      path: "*",
-      element: <h1>404 Erorr</h1>,
     },
   ]);
 

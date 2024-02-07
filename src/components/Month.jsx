@@ -18,8 +18,10 @@ const Month = () => {
       <div className=" calendar__month">
         {currentMonth.map((row, index) => {
           if (
-            dayjs(row[0]).week() === dayjs().week() &&
-            dayjs(row[0]).year() === dayjs().year()
+            (dayjs(row[0]).week() === dayjs().week() &&
+              dayjs(row[0]).year() === dayjs().year()) ||
+            (dayjs(row[row.length - 1]).week() === dayjs().week() &&
+              dayjs(row[row.length - 1]).year() === dayjs().year())
           ) {
             return (
               <div className={`week highlight`} key={index}>

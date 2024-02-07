@@ -1,9 +1,17 @@
 import { NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
+import { isSubmitted } from "../features/sidebar/sidebarSlice";
 
 const CalendarNavBar = () => {
+  const dispatch = useDispatch();
+  const location = useLocation();
   return (
     <nav className="calendar-nav">
       <NavLink
+        onClick={() => {
+          dispatch(isSubmitted(true));
+        }}
         className={({ isActive }) =>
           isActive ? "nav-link active" : "nav-link"
         }

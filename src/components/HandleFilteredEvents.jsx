@@ -45,7 +45,7 @@ const useHandleFilteredEvents = (
         ...(formatValue !== "" ? { type: formatValue } : undefined),
         ...(typeValue !== "" ? { direction: typeValue } : undefined),
       };
-      console.log(conditions);
+
       const queryString = new URLSearchParams(conditions).toString();
 
       navigate({ search: queryString });

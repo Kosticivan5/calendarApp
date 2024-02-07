@@ -1412,7 +1412,7 @@
       "is_devops": 0,
 
       "starting": 0,
-      "learn_own": 0,
+      "learn_own": 1,
       "lead_academy": 0,
       "lead_friday": 0,
       "digital_lit": 0,
@@ -1432,9 +1432,9 @@
 
       "type": "webinar",
 
-      "start_date": "2024-01-24T13:00:00+00:00",
+      "start_date": "2024-02-24T13:00:00+00:00",
 
-      "finish_date": "2024-01-24T15:30:00+00:00",
+      "finish_date": "2024-02-24T15:30:00+00:00",
 
       "organizational_form": "internal",
 
@@ -1452,7 +1452,7 @@
 
       "max_pers": 43,
 
-      "registred": 0,
+      "registred": 1,
 
       "in_wlist": 0
     },
@@ -3944,7 +3944,7 @@
 
       "start_date": "2024-01-19T08:25:00+00:00",
 
-      "finish_date": "2024-01-25T09:00:00+00:00",
+      "finish_date": "2024-01-29T09:00:00+00:00",
 
       "organizational_form": "internal",
 
@@ -4022,9 +4022,9 @@
 
       "type": "webinar",
 
-      "start_date": "2024-01-31T18:25:00+00:00",
+      "start_date": "2024-01-19T08:25:00+00:00",
 
-      "finish_date": "2024-02-06T22:00:00+00:00",
+      "finish_date": "2024-01-29T15:00:00+00:00",
 
       "organizational_form": "internal",
 
@@ -4043,6 +4043,86 @@
       "max_pers": 48,
 
       "registred": 0,
+
+      "in_wlist": 0
+    },
+    {
+      "id": "7322364008862849962month2",
+
+      "name": "multiMonth",
+
+      "local_time_string": "",
+
+      "event_max_pers": 50,
+
+      "is_open": 1,
+
+      "price": "",
+
+      "is_single_person_price": 0,
+
+      "description": "Коллеги",
+
+      "calendar_group": 0,
+      "person_effect": 0,
+      "lead_skill": 1,
+      "digital_it": 0,
+      "design_prod_tech": 0,
+      "bank_finance": 0,
+      "customer_orient": 0,
+
+      "type_no_access": "",
+
+      "for_type": "spec][Для специалистов;boss][Для руководителей",
+
+      "event_rb_type": "tle][Тренинги личной эффективности",
+
+      "beexpert": 0,
+
+      "is_devops": 0,
+
+      "starting": 0,
+      "learn_own": 0,
+      "lead_academy": 1,
+      "lead_friday": 0,
+      "digital_lit": 0,
+      "finance_lit": 0,
+
+      "is_la": 0,
+
+      "type_val": "fa-heart][Вовлеченность",
+
+      "hub": "west_hub][Западный хаб;east_hub][Восточный хаб;all_locations][Все города",
+
+      "type_detailed": "type_webinar][Вебинар",
+
+      "place": "Вне учебного класса",
+
+      "class": "Онлайн",
+
+      "type": "webinar",
+
+      "start_date": "2024-02-22T08:25:00+00:00",
+
+      "finish_date": "2024-09-11T20:30:00+00:00",
+
+      "organizational_form": "internal",
+
+      "isMandatory": "Не обязательное",
+
+      "event_form": "webinar",
+
+      "calendar_show": true,
+
+      "is_passed": 0,
+
+      "company": "Дозорова Виктория Эдуардовна",
+
+      "Mandatorys": "0",
+
+      "max_pers": 48,
+
+      "registred": 1,
 
       "in_wlist": 0
     }
