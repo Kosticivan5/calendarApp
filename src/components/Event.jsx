@@ -28,8 +28,6 @@ const Event = ({
     }
   };
 
-  // console.log(isHidden);
-
   return (
     <Link
       style={isHidden ? { opacity: 0.3 } : {}}

@@ -8,16 +8,24 @@ import { PiMonitorPlayLight } from "react-icons/pi";
 import dayjs from "dayjs";
 import formatDurationInRussian from "../getTimeConverted";
 import { useLocation } from "react-router-dom";
+import { displayedCities } from "../features/eventInfo/EventInfoSlice";
+import { useEffect } from "react";
 
 const EventInfo = () => {
+  const dispatch = useDispatch();
   const location = useLocation();
   const { calendarEvents } = useSelector((store) => store.calendar);
+  const { regions } = useSelector((store) => store.eventInfo);
 
   const { id: eventId } = useParams();
 
   const ev = calendarEvents.find(
     (event) => event.path_id === eventId || event.id === eventId
   );
+
+  useEffect(() => {
+    dispatch(displayedCities(ev.hub));
+  }, []);
 
   const urlAddress = window.location.href;
 
@@ -111,7 +119,7 @@ const EventInfo = () => {
             )}
 
             <p>Регион</p>
-            <p>Нижний Новгород, Самара, Красноярск</p>
+            <p>{regions ? regions : ""}</p>
             <p>Преподаватель</p>
             {<div dangerouslySetInnerHTML={{ __html: ev.company }} />}
             {/* <p>{ev.company} </p> */}
@@ -121,8 +129,11 @@ const EventInfo = () => {
           </div>
         </section>
         <div className="info-button-container">
-          <button>Зарегистрироваться</button>
-          {/* <button>Отменить регистрацию</button> */}
+          {ev.registred ? (
+            <button>Отменить регистрацию</button>
+          ) : (
+            <button>Зарегистрироваться</button>
+          )}
         </div>
       </aside>
     </>

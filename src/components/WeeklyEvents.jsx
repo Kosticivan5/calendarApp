@@ -2,15 +2,11 @@ import Day from "./Day";
 import Event from "./Event";
 import dayjs from "dayjs";
 import { nanoid } from "nanoid";
-// import { useGlobalContext } from "../context/GlobalContext";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const WeeklyEvents = ({ row }) => {
   const mapEvents = new Map();
-  // const { newData, monthIndex } = useGlobalContext();
   const { calendarEvents } = useSelector((store) => store.calendar);
-  const { filteredEvents } = useSelector((store) => store.searchBarFilter);
-  const dispatch = useDispatch();
 
   return (
     <>

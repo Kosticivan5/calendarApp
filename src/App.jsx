@@ -18,8 +18,6 @@ import CalendarRETAIL from "./pages/CalendarRETAIL";
 import CalendarDRPZ from "./pages/CalendarDRPZ";
 import SharedLayout from "./pages/SharedLayout";
 import EventInfo from "./pages/EventInfo";
-// import Sidebar from "./components/Sidebar";
-// import { handleSearchBarEvents } from "./features/Searchbar/searchbarSlice";
 import { createHashHistory } from "history";
 import { updateFiltersFromUrl } from "./filtersUtils";
 import { isSubmitted } from "./features/sidebar/sidebarSlice";
@@ -57,10 +55,6 @@ function App() {
   useEffect(() => {
     localStorage.setItem("eventList", JSON.stringify(calendarEvents));
   }, [location.search, calendarEvents]);
-
-  // useEffect(() => {
-  //   dispatch(handleSearchBarEvents(calendarEvents));
-  // }, [calendarEvents]);
 
   if (isLoading) {
     return (

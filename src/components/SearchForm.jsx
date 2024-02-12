@@ -10,10 +10,8 @@ import useHandleFilteredEvents from "./HandleFilteredEvents";
 import { useNavigate, useLocation } from "react-router-dom";
 import { isSubmitted } from "../features/sidebar/sidebarSlice";
 
-import { Form, useLoaderData, Link } from "react-router-dom";
-
 const SearchForm = () => {
-  const [value, setValue] = useState("");
+  // const [value, setValue] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -94,17 +92,19 @@ const SearchForm = () => {
           placeholder="Поиск внутри календаря"
           autoComplete="off"
         />
-        <button
-          type="button"
-          onClick={() => {
-            setValue("");
-            dispatch(resetSearchBarValue(""));
-            dispatch(isSubmitted(true));
-          }}
-          className="search-reset-icon"
-        >
-          {searchValue.trim() !== "" && <GrClose />}
-        </button>
+        {searchValue.trim() !== "" && (
+          <button
+            type="button"
+            onClick={() => {
+              // setValue("");
+              dispatch(resetSearchBarValue(""));
+              dispatch(isSubmitted(true));
+            }}
+            className="search-reset-icon"
+          >
+            <GrClose />
+          </button>
+        )}
       </div>
       <button className="search-form__btn" type="submit">
         Найти

@@ -17,7 +17,7 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 dayjs().utcOffset(180);
 
-// dayjs.tz.setDefault("Europe/Moscow");
+dayjs.tz.setDefault("Europe/Moscow");
 
 dayjs.extend(localizedFormat);
 dayjs.locale("ru");
@@ -101,9 +101,13 @@ export const getNewData = (data) => {
       max_pers,
       registred,
       in_wlist,
+      hub,
     } = info;
 
     // getWeeksBetweenDates(dayjs(start_date), dayjs(finish_date));
+
+    // =======
+    // =======
 
     // if the weeks of two dates don't have same week or same moth, we process them
     if (
@@ -138,11 +142,10 @@ export const getNewData = (data) => {
         amountOfWeeks =
           amountOfWeeks + endOfMonthNonWeekendDays(start_date, finish_date);
       }
-      console.log(endOfMonthOriginIncluded, "amount of weeks", amountOfWeeks);
+
       // loop that determines to how many peaces we split the event
       for (let i = 0; i <= amountOfWeeks; i++) {
         // if it's the first slice, it gets property of 1
-        console.log(i);
 
         isMiddle = 1;
 
@@ -175,7 +178,7 @@ export const getNewData = (data) => {
           newStartDate = multiMonthStartDay;
         }
         multiMonthStartDay = null;
-        // tje start of the event
+        // the start of the event
         let eventStart = dayjs(newStartDate).day();
 
         // how many lines is event allowed to span
@@ -205,7 +208,6 @@ export const getNewData = (data) => {
           endOfMonthIncluded &&
           dayjs(newStartDate).week() === dayjs(endOfMonth).week()
         ) {
-          // console.log("hello");
           addDays = dayjs(endOfMonth).diff(newStartDate, "day");
           multiMonthStartDay = dayjs(endOfMonth).add(1, "day").format();
           if (dayjs(multiMonthStartDay).get("day") === 6) {
@@ -237,8 +239,8 @@ export const getNewData = (data) => {
 
         let newEvent = {
           path_id: id,
-          id: `${id}mw${idCounter}`,
           name,
+          id: `${id}mw${idCounter}`,
           start_date: dayjs(newStartDate).format(),
           finish_date: dayjs(newFinishDate).format(),
           is_multiWeek: true,
@@ -277,6 +279,7 @@ export const getNewData = (data) => {
           max_pers,
           registred,
           in_wlist,
+          hub,
         };
 
         idCounter += 1;

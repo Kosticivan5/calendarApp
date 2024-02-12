@@ -1,7 +1,7 @@
 import FormatDropdown from "./FormatDropdown";
 import TypesDropdown from "./TypesDropdown";
 
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   toggleCheckbox,
@@ -9,19 +9,14 @@ import {
 } from "../features/checkboxes/checkboxesSlice";
 
 import { useEffect } from "react";
-import {
-  isSubmitted,
-  toggleDisabledButton,
-} from "../features/sidebar/sidebarSlice";
+import { isSubmitted } from "../features/sidebar/sidebarSlice";
 import useHandleFilteredEvents from "./HandleFilteredEvents";
 import { resetType } from "../features/typesDropdown/typesDropdownSlice";
 import { resetFormat } from "../features/formatDropdown/formatDropdownSlice";
-import { updateFiltersFromUrl } from "../filtersUtils";
 
 const Sidebar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
 
   const {
     registred,
