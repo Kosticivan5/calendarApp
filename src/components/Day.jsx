@@ -1,9 +1,6 @@
 import dayjs from "dayjs";
-// import { useGlobalContext } from "../context/GlobalContext";
-// import Event from "./Event";
-// import { data } from "../data";
 
-const Day = ({ day, rowIndex }) => {
+const Day = ({ day }) => {
   // current day
   const highlightCurrDay = () => {
     if (day) {

@@ -47,18 +47,17 @@ const EventInfo = () => {
           <div className="time-date-container">
             <div className="date">
               <CiCalendar />
-              {(
+              {ev?.old_start_date && ev?.old_finish_date ? (
                 <>
                   <p>{dayjs(ev?.old_start_date).format(" D MMMM")}</p>
                   <p>{dayjs(ev?.old_start_date).format("LT")}</p>
                 </>
-              ) || (
+              ) : (
                 <>
                   <p>{dayjs(ev?.start_date).format(" D MMMM")}</p>
                   <p>{dayjs(ev?.start_date).format("LT")}</p>
                 </>
               )}
-
               <p>мск</p>
             </div>
             <div className="time">

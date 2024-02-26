@@ -3,14 +3,15 @@ import { useSelector } from "react-redux";
 import { filterEvents } from "../features/calendar/calendarSlice";
 import { useState, useEffect } from "react";
 import { store } from "../store";
+// ======
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { isSubmitted } from "../features/sidebar/sidebarSlice";
+// ======
 
 const useHandleFilteredEvents = (
-  navigate,
-  conditions,
   submitted,
-  buttonDisabled,
-  dispatch,
-  isSubmitted,
+  searchValue,
   registred,
   for_type,
   starting,
@@ -20,10 +21,27 @@ const useHandleFilteredEvents = (
   digital_lit,
   finance_lit
 ) => {
-  const { filteredEvents } = useSelector((store) => store.searchBarFilter);
-  const { calendarEvents } = useSelector((store) => store.calendar);
+  // ============
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const { searchValue } = useSelector((store) => store.searchBarFilter);
+  // const {
+  //   registred,
+  //   for_type,
+  //   starting,
+  //   lead_academy,
+  //   lead_friday,
+  //   learn_own,
+  //   digital_lit,
+  //   finance_lit,
+  // } = useSelector((store) => store.checkboxes);
+
+  // ============
+
+  // const { filteredEvents } = useSelector((store) => store.searchBarFilter);
+  const { calendarEvents } = useSelector((store) => store.calendar);
+  // const { submitted } = useSelector((store) => store.sidebar);
+  // const { searchValue } = useSelector((store) => store.searchBarFilter);
   const { formatValue } = useSelector((store) => store.formatDropdown);
   const { typeValue } = useSelector((store) => store.typesDropdown);
 
@@ -32,7 +50,8 @@ const useHandleFilteredEvents = (
     // const queryParams = Object.fromEntries(urlSearchParams.entries());
 
     if (submitted) {
-      conditions = {
+      console.log("hello");
+      let conditions = {
         ...(registred === 1 ? { registred: 1 } : undefined),
         ...(for_type === 1 ? { for_type: "boss" } : undefined),
         ...(starting === 1 ? { starting: 1 } : undefined),
@@ -62,7 +81,7 @@ const useHandleFilteredEvents = (
         const allConditionsMet = Object.entries(conditions).every(
           ([key, value]) => {
             if (key === "name") {
-              return evt[key].toLowerCase().startsWith(value.toLowerCase());
+              return evt[key].toLowerCase().includes(value.toLowerCase());
             }
             if (key === "for_type") {
               return evt[key].indexOf("boss]") !== -1;

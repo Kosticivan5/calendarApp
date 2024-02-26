@@ -22,6 +22,7 @@ import { createHashHistory } from "history";
 import { updateFiltersFromUrl } from "./filtersUtils";
 import { isSubmitted } from "./features/sidebar/sidebarSlice";
 import ErrorPage from "./components/ErrorPage";
+import Redirect from "./Redirect";
 
 function App() {
   const dispatch = useDispatch();
@@ -32,9 +33,7 @@ function App() {
   const search = location.search;
   const hash = location.hash;
 
-  const { isLoading, monthIndex, calendarEvents } = useSelector(
-    (store) => store.calendar
-  );
+  const { monthIndex, calendarEvents } = useSelector((store) => store.calendar);
 
   useEffect(() => {
     const dataAlreadyFetched = JSON.parse(localStorage.getItem("eventList"));
@@ -56,57 +55,58 @@ function App() {
     localStorage.setItem("eventList", JSON.stringify(calendarEvents));
   }, [location.search, calendarEvents]);
 
-  if (isLoading) {
-    return (
-      <div className="loader-container">
-        <span className="loader"></span>
-      </div>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <div className="loader-container">
+  //       <span className="loader"></span>
+  //     </div>
+  //   );
+  // }
 
-  const router = createHashRouter([
-    {
-      path: "/",
-      element: <SharedLayout />,
-      errorElement: <ErrorPage />,
-      children: [
-        {
-          path: `calendarDKO`,
-          element: <CalendarDKO />,
-          children: [{ path: "event-info/:id", element: <EventInfo /> }],
-        },
-        {
-          path: "CalendarCORP",
-          element: <CalendarCORP />,
-        },
-        {
-          path: "CalendarRETAIL",
-          element: <CalendarRETAIL />,
-        },
-        {
-          path: "CalendarDRPZ",
-          element: <CalendarDRPZ />,
-        },
-      ],
-    },
-  ]);
+  // const router = createHashRouter([
+  //   {
+  //     path: "/",
+  //     element: <SharedLayout />,
+  //     errorElement: <ErrorPage />,
+  //     children: [
+  //       {
+  //         path: `calendarDKO`,
+  //         element: <CalendarDKO />,
+  //         children: [{ path: "event-info/:id", element: <EventInfo /> }],
+  //       },
+  //       {
+  //         path: "CalendarCORP",
+  //         element: <CalendarCORP />,
+  //       },
+  //       {
+  //         path: "CalendarRETAIL",
+  //         element: <CalendarRETAIL />,
+  //       },
+  //       {
+  //         path: "CalendarDRPZ",
+  //         element: <CalendarDRPZ />,
+  //       },
+  //     ],
+  //   },
+  // ]);
 
   return (
-    <RouterProvider router={router} />
+    // <RouterProvider router={router} />
 
-    // <HashRouter>
-    //   <Routes>
-    //     <Route path="/" element={<SharedLayout />}>
-    //       <Route path="calendarDKO" element={<CalendarDKO />}>
-    //         <Route path="event-info/:id" element={<EventInfo />} />
-    //       </Route>
-    //       <Route path="calendarCORP" element={<CalendarCORP />} />
-    //       <Route path="CalendarRETAIL" element={<CalendarRETAIL />} />
-    //       <Route path="CalendarDRPZ" element={<CalendarDRPZ />} />
-    //     </Route>
-    //     <Route path="*" element={<div>404 Erorr</div>} />
-    //   </Routes>
-    // </HashRouter>
+    <HashRouter>
+      <Routes>
+        <Route path="/" element={<SharedLayout />}>
+          <Route index element={<Redirect />} />
+          <Route path="calendarDKO" element={<CalendarDKO />}>
+            <Route path="event-info/:id" element={<EventInfo />} />
+          </Route>
+          <Route path="calendarCORP" element={<CalendarCORP />} />
+          <Route path="CalendarRETAIL" element={<CalendarRETAIL />} />
+          <Route path="CalendarDRPZ" element={<CalendarDRPZ />} />
+        </Route>
+        <Route path="*" element={<ErrorPage />} />
+      </Routes>
+    </HashRouter>
   );
 }
 

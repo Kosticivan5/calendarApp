@@ -8,7 +8,9 @@ import {
 
 const FormatDropdown = () => {
   const dispatch = useDispatch();
+
   const { isOpen, info } = useSelector((store) => store.formatDropdown);
+
   return (
     <>
       <button

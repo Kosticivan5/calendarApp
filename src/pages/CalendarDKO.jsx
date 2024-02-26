@@ -4,6 +4,7 @@ import Sidebar from "../components/Sidebar";
 import DaysOfWeek from "../components/DaysOfWeek";
 import SearchForm from "../components/SearchForm";
 import { Outlet } from "react-router-dom";
+import SharedLayout from "./SharedLayout";
 
 const CalendarDKO = () => {
   return (

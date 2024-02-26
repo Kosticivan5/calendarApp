@@ -26,7 +26,7 @@ const initialState = {
   currentMonth: getMonth(),
   calendarDays: "",
   fullEvents: [],
-  isLoading: false,
+  isLoading: true,
 };
 
 const calendarSlice = createSlice({

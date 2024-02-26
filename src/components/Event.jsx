@@ -1,13 +1,10 @@
 import dayjs from "dayjs";
-import { Link, useLoaderData, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 const Event = ({
   name,
   start_date,
   finish_date,
-  multiWeek,
   is_first,
   is_last,
   is_Middle,
@@ -17,7 +14,9 @@ const Event = ({
   isHidden,
 }) => {
   const location = useLocation();
+
   const eventStart = dayjs(start_date).day();
+
   let eventEnd = dayjs(finish_date).diff(dayjs(start_date), "day");
   eventEnd += 1;
   const titleLimit = name.substring(0, 18);

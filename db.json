@@ -32,7 +32,7 @@
 
       "event_rb_type": "all][Общебанковские тренинги",
 
-      "learn_own": 0,
+      "learn_own": 1,
       "lead_academy": 0,
       "lead_friday": 0,
       "digital_lit": 0,
@@ -56,9 +56,9 @@
 
       "type": "webinar",
 
-      "start_date": "2024-01-30T10:00:00+00:00",
+      "start_date": "2024-02-27T10:00:00+00:00",
 
-      "finish_date": "2024-01-30T12:00:00+00:00",
+      "finish_date": "2024-02-28T11:00:00+00:00",
 
       "organizational_form": "internal",
 
@@ -1432,9 +1432,9 @@
 
       "type": "webinar",
 
-      "start_date": "2024-02-24T13:00:00+00:00",
+      "start_date": "2024-02-21T13:00:00+00:00",
 
-      "finish_date": "2024-02-24T15:30:00+00:00",
+      "finish_date": "2024-02-21T15:30:00+00:00",
 
       "organizational_form": "internal",
 
